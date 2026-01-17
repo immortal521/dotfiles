@@ -1,0 +1,8 @@
+font_family JetBrainsMono Nerd Font
+font_size 14.0
+include colors.conf
+background_opacity 0.85
+background_blur 3
+cursor_trail 50
+cursor_trail_decay 0.1 0.4
+cursor_trail_start_threshold 2

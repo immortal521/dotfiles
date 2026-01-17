@@ -1,0 +1,22 @@
+[user]
+	name = immortal521
+	email = immort521@gmail.com
+[http]
+	maxRequests = 200
+	proxy = localhost:10808
+[core]
+	compression = 0
+	attributesfile = ~/.gitattributes
+[transfer]
+	fsckobjects = false
+[credential]
+	helper = store
+[safe]
+	directory = /mnt/ntfs/Users/immortal/.config/nvim
+[https]
+	proxy = localhost:10808
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

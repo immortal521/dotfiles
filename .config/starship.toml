@@ -1,0 +1,70 @@
+# ~/.config/starship.toml
+
+format = """\
+[┏\\[ ](#71daa6)$username [from](#71daa6) $hostname\
+[\\]](#71daa6)$time$memory_usage$battery$cmd_duration
+[┣](#71daa6)$directory$git_branch
+[┗━►](#71daa6) \
+"""
+
+add_newline = true
+
+[status]
+symbol = '🔴 '
+success_symbol = ""
+format = '[\[$symbol$status\]]($style)'
+map_symbol = true
+disabled = false
+
+[character]
+success_symbol = "[#](yellow)"
+error_symbol = "[✘](bold red)"
+
+[time]
+style = "#71daa6"
+disabled = false
+format = "[\\[$time\\]]($style)"
+time_format = "%y/%m/%d@%H:%M:%S"
+
+[username]
+show_always = true
+format = "[$user](#71daa6)"
+
+[hostname]
+ssh_only = false
+format = "[ $hostname](#71daa6)"
+
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+format = "[\\[${symbol}${percentage}\\]]($style)"
+
+[[battery.display]]
+threshold = 30
+style = "#ffb4ab"
+
+[[battery.display]]
+threshold = 100
+style = "#83d2e3"
+
+[cmd_duration]
+min_time = 1
+show_milliseconds = true
+format = "[\\[⏱ $duration\\]]($style)"
+style = "#83d2e3"
+
+[directory]
+truncation_length = 8
+fish_style_pwd_dir_length = 2
+format = "[\\[ $path\\]](#90d5af)"
+
+[git_branch]
+ignore_branches = ["main", "master"]
+format = "[\\[ $branch ≡\\]](#90d5af)"
+
+[memory_usage]
+threshold = 1
+disabled = false
+format = "[\\[ RAM:${ram}\\]]($style)"
+style = "#83d2e3"

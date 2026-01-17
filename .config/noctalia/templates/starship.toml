@@ -1,0 +1,70 @@
+# ~/.config/starship.toml
+
+format = """\
+[┏\\\[ ]({{colors.primary.default.hex}})$username [from]({{colors.primary.default.hex}}) $hostname\
+[\\\]]({{colors.primary.default.hex}})$time$memory_usage$battery$cmd_duration
+[┣]({{colors.primary.default.hex}})$directory$git_branch
+[┗━►]({{colors.primary.default.hex}}) \
+"""
+
+add_newline = true
+
+[status]
+symbol = '🔴 '
+success_symbol = ""
+format = '[\[$symbol$status\]]($style)'
+map_symbol = true
+disabled = false
+
+[character]
+success_symbol = "[#](yellow)"
+error_symbol = "[✘](bold red)"
+
+[time]
+style = "{{colors.primary.default.hex}}"
+disabled = false
+format = "[\\\[$time\\\]]($style)"
+time_format = "%y/%m/%d@%H:%M:%S"
+
+[username]
+show_always = true
+format = "[$user]({{colors.primary.default.hex}})"
+
+[hostname]
+ssh_only = false
+format = "[ $hostname]({{colors.primary.default.hex}})"
+
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+format = "[\\\[${symbol}${percentage}\\\]]($style)"
+
+[[battery.display]]
+threshold = 30
+style = "{{colors.error.default.hex}}"
+
+[[battery.display]]
+threshold = 100
+style = "{{colors.tertiary.default.hex}}"
+
+[cmd_duration]
+min_time = 1
+show_milliseconds = true
+format = "[\\\[⏱ $duration\\\]]($style)"
+style = "{{colors.tertiary.default.hex}}"
+
+[directory]
+truncation_length = 8
+fish_style_pwd_dir_length = 2
+format = "[\\\[ $path\\\]]({{colors.secondary.default.hex}})"
+
+[git_branch]
+ignore_branches = ["main", "master"]
+format = "[\\\[ $branch ≡\\\]]({{colors.secondary.default.hex}})"
+
+[memory_usage]
+threshold = 1
+disabled = false
+format = "[\\\[ RAM:${ram}\\\]]($style)"
+style = "{{colors.tertiary.default.hex}}"
