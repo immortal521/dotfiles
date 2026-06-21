@@ -1,0 +1,213 @@
+[backdrop]
+blur_intensity = 0.75
+enabled = true
+
+[bar]
+order = ["default"]
+
+[bar.default]
+auto_hide = true
+background_opacity = 0.73999998345971107
+border = "hover"
+border_width = 1.0
+center = ["audio_visualizer"]
+end = [
+  "media",
+  "tray",
+  "notifications",
+  "battery",
+  "network",
+  "bluetooth",
+  "volume",
+  "brightness",
+  "date",
+  "control-center",
+]
+layer = "overlay"
+margin_edge = 4
+margin_ends = 4
+position = "bottom"
+radius = 20
+reserve_space = false
+start = ["workspaces"]
+thickness = 45
+
+[brightness]
+enable_ddcutil = true
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+[desktop_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[desktop_widgets.widget]
+
+[dock]
+enabled = false
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = ["lockscreen-login-box@eDP-1", "lockscreen-login-box@HDMI-A-1"]
+
+[lockscreen_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+box_height = 0.0
+box_width = 0.0
+cx = 752.0
+cy = 880.0
+output = "HDMI-A-1"
+rotation = 0.0
+type = "login_box"
+
+[lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+background_color = "surface_variant"
+background_opacity = 0.88
+background_radius = 12.0
+input_opacity = 1.0
+input_radius = 6.0
+show_login_button = true
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+box_height = 0.0
+box_width = 0.0
+cx = 768.0
+cy = 741.0
+output = "eDP-1"
+rotation = 0.0
+type = "login_box"
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+background_color = "surface_variant"
+background_opacity = 0.88
+background_radius = 12.0
+input_opacity = 1.0
+input_radius = 6.0
+show_login_button = true
+
+[nightlight]
+temperature_day = 10000
+temperature_night = 9900
+
+[notification]
+layer = "overlay"
+monitors = ["HDMI-A-1"]
+position = "top_left"
+
+[osd]
+background_opacity = 0.74999998323619366
+
+[plugins]
+enabled = []
+
+[shell]
+niri_overview_type_to_launch_enabled = true
+password_style = "random"
+polkit_agent = true
+settings_show_advanced = true
+
+[shell.panel]
+clipboard_placement = "floating"
+launcher_placement = "attached"
+open_near_click_control_center = true
+open_near_click_launcher = true
+session_placement = "centered"
+transparency_mode = "glass"
+
+[shell.screen_corners]
+enabled = true
+
+
+[shell.screenshot]
+directory = "/home/immortal/Pictures/Screenshots"
+pipe_command = "satty -f -"
+pipe_to_command = true
+
+[theme]
+builtin = "Tokyo-Night"
+mode = "auto"
+source = "wallpaper"
+wallpaper_scheme = "m3-fruit-salad"
+
+[theme.templates]
+builtin_ids = [
+  "alacritty",
+  "btop",
+  "cava",
+  "gtk3",
+  "gtk4",
+  "ghostty",
+  "kcolorscheme",
+  "kitty",
+  "niri",
+  "qt",
+  "starship",
+]
+community_ids = ["obsidian", "vicinae", "discord", "yazi"]
+
+[wallpaper]
+directory = "/home/immortal/Pictures/Wallpapers"
+
+[wallpaper.automation]
+enabled = true
+interval_seconds = 1200
+
+[wallpaper.default]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.last]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.monitors.eDP-1]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[widget.audio_visualizer]
+anchor = true
+bands = 64
+show_when_idle = true
+width = 100.0
+
+[widget.battery]
+hide_when_full = true
+hide_when_plugged = true
+show_label = false
+
+[widget.brightness]
+show_label = false
+
+[widget.control-center]
+glyph = "brand-amigo"
+
+[widget.date]
+format = "%m-%d %H:%M:%S"
+
+[widget.network]
+show_label = false
+
+[widget.tray]
+drawer = true
+
+[widget.volume]
+scroll_step = 2
+show_label = false
+
+[widget.workspaces]
+display = "none"

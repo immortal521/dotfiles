@@ -1,0 +1,54 @@
+// === 输入设备配置 (键盘/触控板/鼠标) ===
+input {
+  keyboard {
+    xkb {}
+    numlock
+  }
+
+  touchpad {
+    tap
+    natural-scroll
+  }
+
+  mouse {
+    accel-profile "flat"
+  }
+  trackpoint {}
+}
+
+// === 快捷键与截图配置 ===
+hotkey-overlay {
+  skip-at-startup
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// === 开机自启服务 ===
+spawn-at-startup "noctalia"
+spawn-at-startup "/usr/bin/fcitx5"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "vicinae" "server"
+spawn-at-startup "wl-clip-persist" "--clipboard" "regular"
+
+// === 调试与手势 ===
+debug {
+  honor-xdg-activation-with-invalid-serial
+}
+
+gestures {
+  hot-corners {
+    off
+  }
+}
+
+// === 外部配置文件引入 ===
+include "outputs.kdl"
+include "animations.kdl"
+include "environment.kdl"
+include "cursor.kdl"
+include "binds.kdl"
+include "layout.kdl"
+include "windowrules.kdl"
+include "layerrules.kdl"
+
+include "noctalia.kdl"

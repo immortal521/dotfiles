@@ -1,0 +1,2 @@
+[hooks]
+theme_mode_changed = "~/.config/noctalia/hooks/theme_mode_changed.sh"

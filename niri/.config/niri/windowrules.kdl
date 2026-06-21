@@ -1,0 +1,80 @@
+// === 全局基础窗口样式 ===
+window-rule {
+  geometry-corner-radius 20
+  clip-to-geometry true
+  tiled-state true
+  draw-border-with-background false
+}
+
+// === 系统组件与专属工具 ===
+window-rule {
+  match app-id="dev.noctalia.Noctalia.Settings"
+  open-floating true
+  default-column-width { proportion 0.8; }
+  default-window-height { proportion 0.9; }
+}
+
+window-rule {
+  match app-id=r#"org.quickshell$"#
+  open-floating true
+}
+
+// === 浏览器与终端规则 ===
+window-rule {
+  match app-id="zen"
+  draw-border-with-background false
+}
+
+window-rule {
+  match app-id=r#"^org\.wezfurlong\.wezterm$"#
+  default-column-width {}
+}
+
+window-rule {
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  open-floating true
+}
+
+// === 隐私与安全（防录屏截屏） ===
+window-rule {
+  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+  match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+  block-out-from "screencast"
+}
+
+// === 日常社交软件（QQ/微信/输入法配置） ===
+window-rule {
+  match app-id="^QQ$"
+  match app-id="^wechat$" title="^图片和视频$"
+  match app-id="^org.fcitx.fcitx5-config-qt$" title="^经典用户界面 — Fcitx 配置$"
+  match app-id="^com.gabm.satty$" title="^satty$"
+  exclude app-id="^QQ$" title="^QQ$"
+  open-floating true
+  default-column-width { proportion 0.75; }
+  default-window-height { fixed 700; }
+  open-maximized false
+}
+
+// === 工具与媒体应用布局 ===
+window-rule {
+  match app-id="^com.follow.clash$" title="^FlClash$"
+  default-column-width { proportion 0.33333; }
+  open-maximized false
+}
+
+window-rule {
+  match app-id="^qqmusic$" title="^qqmusic$"
+  default-column-width { proportion 0.66667; }
+  open-maximized false
+}
+
+// === 终端与编辑器毛玻璃特效 ===
+window-rule {
+  match app-id=r#"^com\.mitchellh\.ghostty$"#
+  match app-id="^neovide$"
+
+  background-effect {
+    blur true
+  }
+}

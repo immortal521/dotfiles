@@ -1,0 +1,53 @@
+// === 基础窗口与全局行为 ===
+prefer-no-csd
+
+// === 桌面布局与外观配置 ===
+layout {
+  background-color "transparent"
+  gaps 4
+
+  // 边框与焦点环
+  border {
+    width 2
+  }
+  focus-ring {
+    width 2
+  }
+
+  // 窗口居中规则
+  // center-focused-column "always"
+  always-center-single-column
+
+  // 预设宽度与高度列表 (Mod+R / Mod+Shift+R)
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 1.0
+  }
+  preset-window-heights {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 1.0
+  }
+
+  default-column-width {}
+
+  // 窗口阴影效果
+  shadow {
+    on
+    softness 30
+    spread 5
+    offset x=0 y=5
+    color "#0007"
+  }
+
+  // 屏幕边缘留白 (面板占用区域)
+  struts {
+    // left 64
+    // right 64
+    // top 64
+    // bottom 64
+  }
+}
