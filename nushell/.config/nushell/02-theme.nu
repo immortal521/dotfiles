@@ -1,7 +1,7 @@
 let dark_theme = {
     # color for nushell primitives
     separator: white
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
+    leading_trailing_space_bg: {attr: n} # no fg, no bg, attr none effectively turns this off
     header: green_bold
     empty: blue
     # Closures can be used to choose colors for specific values.
@@ -23,7 +23,7 @@ let dark_theme = {
     list: white
     block: white
     hints: dark_gray
-    search_result: { bg: red fg: white }
+    search_result: {bg: red, fg: white}
     shape_and: purple_bold
     shape_binary: purple_bold
     shape_block: blue_bold
@@ -39,7 +39,7 @@ let dark_theme = {
     shape_flag: blue_bold
     shape_float: purple_bold
     # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: white bg: red attr: b }
+    shape_garbage: {fg: white, bg: red, attr: b}
     shape_glob_interpolation: cyan_bold
     shape_globpattern: cyan_bold
     shape_int: purple_bold
@@ -48,7 +48,7 @@ let dark_theme = {
     shape_list: cyan_bold
     shape_literal: blue
     shape_match_pattern: green
-    shape_matching_brackets: { attr: u }
+    shape_matching_brackets: {attr: u}
     shape_nothing: light_cyan
     shape_operator: yellow
     shape_or: purple_bold
@@ -66,9 +66,10 @@ let dark_theme = {
 }
 
 let light_theme = {
+
     # color for nushell primitives
     separator: dark_gray
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
+    leading_trailing_space_bg: {attr: n} # no fg, no bg, attr none effectively turns this off
     header: green_bold
     empty: blue
     # Closures can be used to choose colors for specific values.
@@ -90,7 +91,7 @@ let light_theme = {
     list: dark_gray
     block: dark_gray
     hints: dark_gray
-    search_result: { fg: white bg: red }
+    search_result: {fg: white, bg: red}
     shape_and: purple_bold
     shape_binary: purple_bold
     shape_block: blue_bold
@@ -106,7 +107,7 @@ let light_theme = {
     shape_flag: blue_bold
     shape_float: purple_bold
     # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: white bg: red attr: b }
+    shape_garbage: {fg: white, bg: red, attr: b}
     shape_glob_interpolation: cyan_bold
     shape_globpattern: cyan_bold
     shape_int: purple_bold
@@ -115,7 +116,7 @@ let light_theme = {
     shape_list: cyan_bold
     shape_literal: blue
     shape_match_pattern: green
-    shape_matching_brackets: { attr: u }
+    shape_matching_brackets: {attr: u}
     shape_nothing: light_cyan
     shape_operator: yellow
     shape_or: purple_bold

@@ -1,80 +1,154 @@
-// === 全局基础窗口样式 ===
+// =====================================================
+// 全局基础窗口样式
+// =====================================================
+
 window-rule {
-  geometry-corner-radius 20
+  geometry-corner-radius 16
   clip-to-geometry true
   tiled-state true
   draw-border-with-background false
 }
 
-// === 系统组件与专属工具 ===
-window-rule {
-  match app-id="dev.noctalia.Noctalia.Settings"
-  open-floating true
-  default-column-width { proportion 0.8; }
-  default-window-height { proportion 0.9; }
+blur {
+  passes 3
+  offset 2.3
+  noise 0.001
+  saturation 2
 }
 
-window-rule {
-  match app-id=r#"org.quickshell$"#
-  open-floating true
-}
 
-// === 浏览器与终端规则 ===
-window-rule {
-  match app-id="zen"
-  draw-border-with-background false
-}
+// =====================================================
+// 毛玻璃窗口
+// =====================================================
 
 window-rule {
-  match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  default-column-width {}
-}
-
-window-rule {
-  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-  open-floating true
-}
-
-// === 隐私与安全（防录屏截屏） ===
-window-rule {
-  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-  match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-  block-out-from "screencast"
-}
-
-// === 日常社交软件（QQ/微信/输入法配置） ===
-window-rule {
-  match app-id="^QQ$"
-  match app-id="^wechat$" title="^图片和视频$"
-  match app-id="^org.fcitx.fcitx5-config-qt$" title="^经典用户界面 — Fcitx 配置$"
-  match app-id="^com.gabm.satty$" title="^satty$"
-  exclude app-id="^QQ$" title="^QQ$"
-  open-floating true
-  default-column-width { proportion 0.75; }
-  default-window-height { fixed 700; }
-  open-maximized false
-}
-
-// === 工具与媒体应用布局 ===
-window-rule {
-  match app-id="^com.follow.clash$" title="^FlClash$"
-  default-column-width { proportion 0.33333; }
-  open-maximized false
-}
-
-window-rule {
-  match app-id="^qqmusic$" title="^qqmusic$"
-  default-column-width { proportion 0.66667; }
-  open-maximized false
-}
-
-// === 终端与编辑器毛玻璃特效 ===
-window-rule {
-  match app-id=r#"^com\.mitchellh\.ghostty$"#
+  match app-id=r"^com\.mitchellh\.ghostty$"
   match app-id="^neovide$"
+  match app-id="obsidian"
+  match app-id=r"^org\.gnome\.Nautilus$"
 
   background-effect {
     blur true
   }
+}
+
+window-rule {
+  match app-id="obsidian"
+  match app-id=r"^org\.gnome\.Nautilus$"
+
+  opacity 0.9
+
+  background-effect {
+    xray true
+  }
+}
+
+
+// =====================================================
+// 系统组件
+// =====================================================
+
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+
+  open-floating true
+
+  default-column-width {
+    proportion 0.8
+  }
+
+  default-window-height {
+    proportion 0.9
+  }
+}
+
+
+// =====================================================
+// 浏览器 / 终端
+// =====================================================
+
+window-rule {
+  match app-id=r"^org\.wezfurlong\.wezterm$"
+
+  default-column-width
+}
+
+window-rule {
+  match app-id=r"firefox$" title="^Picture-in-Picture$"
+
+  open-floating true
+}
+
+
+// =====================================================
+// 隐私安全
+// =====================================================
+
+window-rule {
+  match app-id=r"^org\.keepassxc\.KeePassXC$"
+  match app-id=r"^org\.gnome\.World\.Secrets$"
+
+  block-out-from "screencast"
+}
+
+
+// =====================================================
+// 浮动小窗口
+// =====================================================
+
+window-rule {
+  match app-id="^QQ$"
+  match app-id="^wechat$" title="^图片和视频$"
+  match app-id="^org.fcitx.fcitx5-config-qt$" title="^经典用户界面 — Fcitx 配置$"
+  match app-id="^com.gabm.satty$"
+
+  exclude app-id="^QQ$" title="^QQ$"
+
+  open-floating true
+  open-maximized false
+
+  default-column-width {
+    proportion 0.75
+  }
+
+  default-window-height {
+    fixed 700
+  }
+}
+
+
+// =====================================================
+// 媒体 / 网络工具
+// =====================================================
+
+window-rule {
+  match app-id="^com.follow.clash$" title="^FlClash$"
+
+  open-maximized false
+
+  default-column-width {
+    proportion 0.33333
+  }
+}
+
+window-rule {
+  match app-id="^qqmusic$" title="^qqmusic$"
+
+  open-maximized false
+
+  default-column-width {
+    proportion 0.66667
+  }
+}
+
+
+// =====================================================
+// Steam 通知
+// =====================================================
+
+window-rule {
+  match app-id=r"^steam$" title=r"^notificationtoasts_\d+_desktop$"
+  match app-id=r"^QQ$" title=r"^资料卡$"
+
+  default-floating-position x=10 y=10 relative-to="bottom-right"
 }

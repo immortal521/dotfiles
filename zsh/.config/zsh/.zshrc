@@ -17,8 +17,3 @@ done
 # 私有配置
 [[ -f "$ZDOTDIR/local.zsh" ]] && \
 source "$ZDOTDIR/local.zsh"
-
-# 初始化工具
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-eval "$(mise activate zsh)"

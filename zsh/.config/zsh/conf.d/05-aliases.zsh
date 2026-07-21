@@ -11,3 +11,7 @@ alias ....='cd ../../..'
 
 alias sd='sudoedit'
 alias gc="git clone"
+
+neovide() {
+  command neovide --fork "$@"
+}
