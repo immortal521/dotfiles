@@ -1,0 +1,160 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: lufs_pinyin
+  name: 朙月拼音
+  version: "2025-04-25"
+  author:
+    - 佛振 <chen.sst@gmail.com>
+    - Modified by Lufs_X <i@isteed.cc>
+  description: |
+    Rime 预设的拼音输入方案。
+
+switches:
+  - name: full_shape
+    states: [半角, 全角]
+  - name: ascii_punct
+    states: [。，, ．，]
+  - name: traditionalization
+    # reset: 0 # 默认状态: 0 简体 1 繁体
+    states: [简, 繁]
+  - name: emoji_suggestion
+    # reset: 1 # 默认状态: 0 关闭 1 开启
+    states: [🈚️️, 🈶️]
+
+engine:
+  processors:
+    - recognizer
+    - lua_processor@*select_character # lua 选词扩展
+    - key_binder
+    - speller
+    - selector
+    - punctuator
+    - navigator
+    - express_editor
+  segmentors:
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - lua_translator@*date_translator # 动态日期时间输入
+    - lua_translator@*unicode_input # Unicode 输入支持
+    - table_translator@custom_phrase # 用户自定义词典
+    - script_translator
+  filters:
+    - simplifier@emoji_suggestion
+    - simplifier@traditionalize # 简繁转化
+    - uniquifier # 去重
+    # - lua_filter@*candidate_sorting.long_phrase_first # 最长词组和单字在先
+    # - lua_filter@*candidate_sorting.single_char_first # 单字优先
+    # - lua_filter@*candidate_sorting.single_char_only # 只显示单字
+
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2t.json # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: none # 转换提示: all 显示 | char 仅单字显示 | none 不显示。
+
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: false
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba/
+  delimiter: " '"
+  algebra:
+    - erase/^xx$/
+    - erase/^hm$/
+    - erase/^m$/
+    - erase/^n$/
+    - erase/^ng$/
+
+    # 简拼支持
+    - abbrev/^(.).+$/$1/
+
+    # 模糊音区域
+    # 依据个人情况修改注释～
+    # 注释格式：键盘的输入码 -> 转化后的输入码
+
+    # 声母部分
+    # - derive/^([z])h/$1/ # z -> zh
+    # - derive/^([z])([^h])/$1h$2/ # zh -> z
+    # - derive/^([c])h/$1/ # c -> ch
+    # - derive/^([c])([^h])/$1h$2/ # ch -> c
+    # - derive/^([s])h/$1/ # s -> sh
+    # - derive/^([s])([^h])/$1h$2/ # sh -> s
+    # - derive/^l/n/ # n -> l
+    # - derive/^n/l/ # l -> n
+    # - derive/^r/l/ # l -> r
+    # - derive/^r/y/ # y -> r
+    # - derive/^hu$/fu/ # fu -> hu
+    # - derive/^fu$/hu/ # hu -> fu
+
+    # 韵母部分
+    - derive/([^iu])([a])n$/$1$2ng/ # ang -> an
+    - derive/([^iu])([a])ng$/$1$2n/ # an -> ang
+    - derive/([e])n$/$1ng/ # eng -> en
+    - derive/([e])ng$/$1n/ # en -> eng
+    # - derive/([i])n$/$1ng/ # ing -> in
+    # - derive/([i])ng$/$1n/ # in -> ing
+    # - derive/([i])an$/$1ang/ # iang -> ian
+    # - derive/([i])ang$/$1an/ # ian -> iang
+    # - derive/([u])an$/$1ang/ # uang -> uan
+    # - derive/([u])ang$/$1an/ # uan -> uang
+
+    # 其它模糊音
+    # - derive/^hui$/fei/ # fei -> hui
+    # - derive/^fei$/hui/ # hui -> fei
+    # - derive/^huang$/wang/ # wang -> huang
+    # - derive/^wang$/huang/ # huang -> wang
+    # - derive/^([bpmfw])eng$/$1ong/ # bpmfw 后接 ong -> bpmfw 后接 eng
+
+    # 容错拼写
+    - derive/^([nl])ve$/$1ue/ # nue -> nve, lue -> lve
+    - derive/^([jqxy])u/$1v/ # jv -> ju
+    # - derive/un$/uen/ # guen -> gun
+    # - derive/ui$/uei/ # guei -> gui
+    # - derive/iu$/iou/ # jiou -> jiu
+
+    # 按键纠错
+    - derive/([aeiou])ng$/$1gn/ # dagn -> dang
+    - derive/([dtngkhrzcs])o(u|ng)$/$1o/ # zho -> zhong|zhou
+    - derive/ong$/on/ # zhonguo -> zhong guo
+    - derive/ao$/oa/ # hoa -> hao
+    - derive/([iu])a(o|ng?)$/a$1$2/ # tain -> tian
+    - derive/^([csz])h/h$1/ # hc、hs、hz -> ch、sh、zh
+
+translator:
+  dictionary: extended
+  contextual_suggestions: true
+  enable_completion: false
+  max_homophones: 7
+
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+    # - xform/ // # 去掉上屏字符间空格
+
+grammar:
+  language: zh-hans-t-essay-bgw
+
+punctuator:
+  import_preset: lufs_symbols
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: true
+  initial_quality: 1

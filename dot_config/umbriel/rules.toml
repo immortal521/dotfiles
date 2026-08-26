@@ -1,0 +1,177 @@
+# ============================================================
+# 全局默认 (Global defaults)
+# 无选择器的规则匹配所有窗口；必须放在最前，
+# 后面的 blur = false 等规则才能覆盖它。
+# ============================================================
+[[window_rule]]
+blur = true
+
+# ============================================================
+# Noctalia 桌面壳层 (Shell)
+# ============================================================
+[[window_rule]]
+match.app_id = "^dev\\.noctalia\\.Noctalia$"
+default_floating = true
+default_width = 1.0
+blur_optimized = false
+blur_popups = false
+
+[[window_rule]]
+match.app_id = "^dev\\.noctalia\\.UmbrielSharePicker$"
+default_floating = true
+default_size = [800, 600]
+
+# ============================================================
+# 模糊 / 透明 (Blur & opacity)
+# ============================================================
+[[window_rule]]
+match.app_id = "^(com\\.mitchellh\\.ghostty|neovide|obsidian|org\\.gnome\\.Nautilus)$"
+blur = true
+
+[[window_rule]]
+match.app_id = "^(obsidian|org\\.gnome\\.Nautilus)$"
+opacity = 0.9
+
+[[window_rule]]
+match.app_id = "^(org\\.kde\\.kdenlive|mpv|kazumi|celluloid|virt-manager)$"
+opacity = 1.0
+
+[[window_rule]]
+match.app_id = "^(steam_app_.*|gamescope|wine)$"
+opacity = 1.0
+blur = false
+
+[[window_rule]]
+match.title = "[Gg]enshin [Ii]mpact|[Zz]enless [Zz]one [Zz]ero|[Vv]ictoria 3|[Mm]inecraft|[Ee]ndfield"
+opacity = 1.0
+blur = false
+
+# ============================================================
+# 浮动工具 / 对话框 (Floating utilities & dialogs)
+# ============================================================
+[[window_rule]]
+match.app_id = "^(gnome-control-center|pavucontrol|nm-connection-editor)$"
+default_width = 0.5
+default_floating = false
+
+[[window_rule]]
+match.app_id = "^(org\\.gnome\\.Calculator|gnome-calculator|galculator|blueman-manager|xdg-desktop-portal)$"
+default_floating = true
+
+[[window_rule]]
+match.app_id = "^imv$"
+default_floating = true
+
+[[window_rule]]
+match.title = "^(Open File|Select|Choose a wallpaper|Open Folder|Save As|Library|Choose Where to Download|File Operation Progress|Rename|Copy Files|Move Files|Search Files)$"
+default_floating = true
+
+# ============================================================
+# 画中画 / 媒体查看器 (Picture-in-Picture & media viewers)
+# ============================================================
+[[window_rule]]
+match.title = "(画中画|Picture-in-Picture)"
+default_floating = true
+opacity = 1.0
+default_width = 0.1
+default_position = { x = 20, y = 20, anchor = "bottom_right" }
+
+[[window_rule]]
+match.app_id = "^(org\\.gnome\\.Loupe|org\\.gnome\\.Totem|org\\.gnome\\.Photos)$"
+default_floating = true
+opacity = 1.0
+
+[[window_rule]]
+match.title = "(图片查看器|Image Viewer|图片和视频|Image and Video Viewer|视频播放器|Video Player|Videos)"
+default_floating = true
+opacity = 1.0
+
+# ============================================================
+# 即时通讯 / 国产应用 (IM & local apps)
+# ============================================================
+[[window_rule]]
+match.app_id = "^wechat$"
+match.title = "^图片和视频$"
+default_floating = true
+default_maximize = false
+default_width = 0.75
+
+[[window_rule]]
+match.app_id = "^org\\.fcitx\\.fcitx5-config-qt$"
+match.title = "^Fcitx 配置$"
+default_floating = true
+default_maximize = false
+default_width = 0.75
+
+[[window_rule]]
+match.app_id = "^QQ$"
+match.title = "^QQ$"
+
+[[window_rule]]
+match.app_id = "^QQ$"
+match.title = "^(资料卡|天气)$"
+default_focused = false
+
+[[window_rule]]
+match.app_id = "^QQ$"
+match.title = "^群聊的聊天记录$"
+default_floating = true
+
+[[window_rule]]
+match.app_id = "^qqmusic$"
+match.title = "^qqmusic$"
+default_maximize = false
+default_width = 0.66667
+
+[[window_rule]]
+match.app_id = "^io\\.ente\\.auth$"
+default_floating = true
+default_size = [532, 925]
+
+# ============================================================
+# Steam 专属 (Steam-specific)
+# ============================================================
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "^notificationtoasts_\\d+_desktop$"
+default_position = { x = 10, y = 10, anchor = "bottom_right" }
+default_focused = false
+
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "^(Friends List|好友列表)$"
+default_width = 0.20
+
+# ============================================================
+# 杂项应用 (Misc)
+# ============================================================
+[[window_rule]]
+match.app_id = "^com\\.follow\\.clash$"
+match.title = "^FlClash$"
+default_maximize = false
+default_width = 0.33333
+
+[[window_rule]]
+match.app_id = "^dev\\.lemmy\\.swash$"
+default_floating = true
+default_size = [1000, 900]
+
+# ============================================================
+# 已禁用 / 实验性 (Disabled / experimental)
+# ============================================================
+# [[window_rule]]
+# match.is_focused = false
+# opacity = 0.85
+#
+# [[window_rule]]
+# match.is_focused = true
+# opacity = 1.0
+
+# ============================================================
+# 图层规则 (Layer rules) — 状态栏 / 通知 / 面板 / OSD 等
+# ============================================================
+[[layer_rule]]
+match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+blur = true
+blur_ignore_alpha = 0.5
+blur_optimized = false

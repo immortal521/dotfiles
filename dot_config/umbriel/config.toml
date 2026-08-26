@@ -1,0 +1,27 @@
+[include]
+files = [
+  "appearance.toml",
+  "binds.toml",
+  "environment.toml",
+  "input.toml",
+  "layout.toml",
+  "outputs.toml",
+  "overview.toml",
+  "rules.toml",
+  "workspaces.toml",
+  "noctalia.toml",
+]
+
+[general]
+autostart = [
+  "noctalia",
+  "fcitx5",
+  "wl-paste --watch cliphist store",
+  "vicinae server",
+  "wl-clip-persist --clipboard regular",
+]
+
+xwayland = true                # requires restart to change
+show_cheatsheet = false        # show keybinds overlay on startup
+focus_on_activate = false      # activation requests mark urgent without stealing focus
+honor_restored_maximize = true

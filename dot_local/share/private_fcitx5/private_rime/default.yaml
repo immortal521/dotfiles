@@ -1,0 +1,108 @@
+# Rime default settings
+# encoding: utf-8
+
+config_version: "2025-04-25"
+
+schema_list:
+  - schema: lufs_flypy # 小鹤双拼
+  - schema: lufs_pinyin # 朙月拼音
+  # - schema: lufs_mspy # 微软双拼
+  # - schema: lufs_dpy # 自然码双拼
+  # - schema: lufs_pyjj # 拼音加加双拼
+
+switcher:
+  caption: "[方案菜单]"
+  hotkeys:
+    - F2
+  save_options:
+    - full_shape
+    - ascii_punct
+    - traditionalization
+    - emoji_suggestion
+  fold_options: true
+  abbreviate_options: true
+  option_list_separator: "/"
+
+menu:
+  page_size: 7
+  # alternative_select_labels: [ 壹, 貳, 叄, 肆, 伍, 陸, 柒, 捌, 玖, 拾 ]  # 候选项序号
+
+recognizer:
+  patterns:
+    # 禁止部分输入的自动上屏
+    camel: "[a-z]+[A-Z].*$" # 驼峰命名
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$" # email 地址
+    html: "^<[a-z]+>$" # HTML TAG
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$" # 大写开头
+
+    ## URL 捕获，和逗号句号翻页有冲突
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$" # URL 输入
+    url_plus: "^[a-z]+[.:].*$" # URL 输入加强版（匹配 URL 标准规范 [协议类型]://[服务器地址]:[端口号]/[资源层级UNIX文件路径][文件名]?[查询]#[片段ID]）
+
+    # 响应功能
+    punct: "^/([0-9]0?|[A-Za-z]+)$" # 响应 lufs_symbols.yaml 内的输入
+    unicode: "^U[a-f0-9]+" # 响应 Unicode
+
+ascii_composer:
+  good_old_caps_lock: true
+  switch_key:
+    Shift_L: noop
+    Shift_R: commit_code # 若启用了英文输入，可用右 Shift 切换中英输入
+    Control_L: noop
+    Control_R: noop # macOS 上此项可能无效（我发现我现在键盘压根没得右 Control 键，能不能用自测哈），Windows 上可自行定义
+    Caps_Lock: commit_code
+    Eisu_toggle: clear
+
+key_binder:
+  select_first_character: "bracketleft" # lua 选词快捷键，选第一个字，关闭留空或删除本条
+  select_last_character: "bracketright" # lua 选词快捷键，选最后一个字，关闭留空或删除本条
+  bindings:
+    # Tab / Shift + Tab 翻页
+    - { when: has_menu, accept: Tab, send: Page_Down } # Tab 向下翻页
+    - { when: has_menu, accept: Shift+Tab, send: Page_Up } # Shift + Tab 向上翻页
+
+    # = / - 翻页
+    - { when: has_menu, accept: equal, send: Page_Down } # = 向下翻页
+    - { when: has_menu, accept: minus, send: Page_Up } # - 向上翻页
+
+    # . / , 翻页
+    # 和 URL 捕获正则可能有一定的冲突，需要手动注释 recognizer/patterns 下的 url 和 url_plus
+    # - { when: has_menu, accept: period, send: Page_Down } # 句号向下翻页
+    # - { when: has_menu, accept: comma, send: Page_Up } # 逗号向上翻页
+
+    # ] / [ 翻页
+    # 失效设置，可通过关闭/更改 lua 选词的快捷键恢复
+    # 关闭方法，将 key_binder/select_first_character 和 key_binder/select_last_character 留空或删除
+    # - { when: has_menu, accept: bracketright, send: Page_Down } # 右括号向下翻页
+    # - { when: has_menu, accept: bracketleft, send: Page_Up } # 左括号向上翻页
+
+    # 候选操作
+    # ; 二选 ' 三选
+    - { when: has_menu, accept: semicolon, send: 2 } # 输入时「;」二选
+    - { when: has_menu, accept: apostrophe, send: 3 } # 输入时「'」三选
+
+
+    # Rime key bindings
+    # numbered mode switch
+    # - { when: always, accept: Control+Shift+1, select: .next } # 切换下一个方案
+    # - { when: always, accept: Control+Shift+2, toggle: full_shape } # 切换全角半角
+    # - { when: always, accept: Control+Shift+3, toggle: ascii_punct } # 切换中英标点
+    # - { when: always, accept: Control+Shift+4, toggle: traditionalization } # 切换简繁
+    # - { when: always, accept: Control+Shift+5, toggle: emoji_suggestion } # 切换是否显示 Emoji
+
+    # Rime key bindings
+    # emacs_editing
+    # - { when: composing, accept: Control+p, send: Up }
+    # - { when: composing, accept: Control+n, send: Down }
+    # - { when: composing, accept: Control+b, send: Left }
+    # - { when: composing, accept: Control+f, send: Right }
+    # - { when: composing, accept: Control+a, send: Home }
+    # - { when: composing, accept: Control+e, send: End }
+    # - { when: composing, accept: Control+d, send: Delete }
+    # - { when: composing, accept: Control+k, send: Shift+Delete }
+    # - { when: composing, accept: Control+h, send: BackSpace }
+    # - { when: composing, accept: Control+g, send: Escape }
+    # - { when: composing, accept: Control+bracketleft, send: Escape }
+    # - { when: composing, accept: Control+y, send: Page_Up }
+    # - { when: composing, accept: Alt+v, send: Page_Up }
+    # - { when: composing, accept: Control+v, send: Page_Down }

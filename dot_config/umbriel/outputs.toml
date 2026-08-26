@@ -1,0 +1,20 @@
+[output.eDP-1]
+mode = "1920x1080@165"
+scale = 1.25
+vrr = "fullscreen"
+position = [0, 0]
+# hdr = 'on'
+
+[output.HDMI-A-1]
+mode = "2256x1504@60.000"
+scale = 1.50
+vrr = "fullscreen"
+enabled = true
+transform = "180"
+
+[output.DP-1]
+mode = "2256x1504@60.000"
+scale = 1.5
+vrr = "fullscreen"
+enabled = true
+transform = "180"

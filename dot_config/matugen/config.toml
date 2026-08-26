@@ -1,0 +1,5 @@
+[config]
+
+[templates.starship] # First way of adding template
+input_path = '~/.config/starship/starship_template.toml'
+output_path = '~/.config/starship/starship.toml'

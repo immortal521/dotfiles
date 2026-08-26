@@ -1,0 +1,276 @@
+palette = "noctalia"
+add_newline = true
+command_timeout = 1500
+
+format = """\
+[┏━](blue)\
+$os\
+$username\
+[ ](subtext0)\
+$hostname\
+$container\
+$nix_shell\
+$fill\
+$time\
+$memory_usage\
+$battery\
+$cmd_duration\
+$status
+[┣━](blue)\
+$directory\
+$git_branch\
+$git_status\
+$git_metrics\
+$git_state\
+$golang\
+$nodejs\
+$python\
+$java\
+$kotlin\
+$rust\
+$docker_context\
+$kubernetes
+[┗━►](blue) \
+"""
+
+right_format = "$jobs"
+
+# =========================
+# Core
+# =========================
+
+[fill]
+symbol = " "
+
+[character]
+success_symbol = "[#](green)"
+error_symbol = "[✘](red)"
+vimcmd_symbol = "[](magenta)"
+
+[status]
+disabled = false
+map_symbol = true
+symbol = " "
+success_symbol = ""
+sigint_symbol = "󰗼 "
+not_found_symbol = " "
+not_executable_symbol = "󰜺 "
+format = '[\[$symbol$common_meaning\]]($style)'
+style = "red"
+
+[time]
+disabled = false
+time_format = "%y/%m/%d %H:%M:%S"
+format = '[\[󰥔 $time\]]($style)'
+style = "subtext0"
+
+[cmd_duration]
+min_time = 300
+show_milliseconds = true
+format = '[\[󰔛 $duration\]]($style)'
+style = "green"
+
+[memory_usage]
+disabled = false
+threshold = 70
+format = '[\[󰍛 ${ram_pct}\]]($style)'
+style = "overlay2"
+
+# =========================
+# User / Host
+# =========================
+
+[username]
+show_always = true
+style_user = "bold blue"
+style_root = "red"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold blue"
+format = "[ $hostname]($style)"
+
+[os]
+disabled = false
+format = "[$symbol](blue)"
+
+[os.symbols]
+Arch = " "
+Ubuntu = "󰕈 "
+Debian = "󰣚 "
+Fedora = "󰣛 "
+Macos = "󰀵 "
+Windows = "󰍲 "
+
+[shell]
+disabled = true
+format = '[\[$indicator\]]($style)'
+style = "overlay2"
+
+[container]
+format = '[\[⬢ $name\]]($style)'
+style = "magenta"
+
+[nix_shell]
+format = '[\[❄ $name\]]($style)'
+style = "cyan"
+
+# =========================
+# Directory
+# =========================
+
+[directory]
+truncation_length = 6
+truncate_to_repo = true
+fish_style_pwd_dir_length = 2
+read_only = " 󰌾"
+home_symbol = "~"
+format = '[\[ $path\]]($style)[$read_only]($read_only_style)'
+style = "bold blue"
+read_only_style = "red"
+
+# =========================
+# Git
+# =========================
+
+[git_branch]
+symbol = " "
+format = '[\[$symbol$branch\]]($style)'
+style = "cyan"
+
+[git_status]
+disabled = false
+format = '([\[$all_status$ahead_behind\]]($style))'
+style = "yellow"
+
+[git_metrics]
+disabled = false
+format = '([\[+$added-$deleted\]]($added_style))'
+added_style = "green"
+deleted_style = "red"
+
+[git_state]
+format = '[\($state( $progress_current/$progress_total)\)]($style)'
+style = "magenta"
+
+# =========================
+# Languages
+# =========================
+
+[golang]
+symbol = " "
+format = '[\[$symbol$version\]]($style)'
+style = "cyan"
+
+[nodejs]
+symbol = "󰎙 "
+format = '[\[$symbol$version\]]($style)'
+style = "green"
+
+[python]
+symbol = " "
+python_binary = ["python3"]
+format = '[\[$symbol$version\]]($style)'
+style = "yellow"
+
+[java]
+symbol = " "
+format = '[\[$symbol$version\]]($style)'
+style = "red"
+
+[kotlin]
+symbol = " "
+format = '[\[$symbol$version\]]($style)'
+style = "magenta"
+
+[rust]
+symbol = "󱘗 "
+format = '[\[$symbol$version\]]($style)'
+style = "magenta"
+
+# =========================
+# Infra
+# =========================
+
+[docker_context]
+symbol = " "
+format = '[\[$symbol$context\]]($style)'
+style = "cyan"
+
+[kubernetes]
+disabled = false
+symbol = "󱃾 "
+format = '[\[$symbol$context(:$namespace)\]]($style)'
+style = "cyan"
+
+# =========================
+# Battery
+# =========================
+
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+format = '[\[$symbol$percentage\]]($style)'
+
+[[battery.display]]
+threshold = 30
+style = "red"
+
+[[battery.display]]
+threshold = 50
+style = "yellow"
+
+[[battery.display]]
+threshold = 100
+style = "green"
+
+# =========================
+# Jobs
+# =========================
+
+[jobs]
+symbol = "󰣖 "
+number_threshold = 1
+format = '[\[$symbol$number\]]($style)'
+style = "yellow"
+
+[palettes.noctalia]
+# Standard colors
+blue      = "{{colors.terminal_normal_blue.default.hex}}"
+red       = "{{colors.terminal_normal_red.default.hex}}"
+green     = "{{colors.terminal_normal_green.default.hex}}"
+yellow    = "{{colors.terminal_normal_yellow.default.hex}}"
+cyan      = "{{colors.terminal_normal_cyan.default.hex}}"
+magenta   = "{{colors.terminal_normal_magenta.default.hex}}"
+white     = "{{colors.terminal_normal_white.default.hex}}"
+black     = "{{colors.terminal_normal_black.default.hex}}"
+
+# Extended palette (Catppuccin-compatible names)
+rosewater = "{{colors.terminal_bright_yellow.default.hex}}"
+flamingo  = "{{colors.terminal_bright_red.default.hex}}"
+pink      = "{{colors.terminal_bright_magenta.default.hex}}"
+mauve     = "{{colors.terminal_normal_magenta.default.hex}}"
+maroon    = "{{colors.terminal_bright_red.default.hex}}"
+peach     = "{{colors.terminal_bright_yellow.default.hex}}"
+teal      = "{{colors.terminal_normal_cyan.default.hex}}"
+sky       = "{{colors.terminal_bright_cyan.default.hex}}"
+sapphire  = "{{colors.terminal_bright_blue.default.hex}}"
+lavender  = "{{colors.terminal_bright_magenta.default.hex}}"
+
+# Text shades
+text      = "{{colors.terminal_foreground.default.hex}}"
+subtext1  = "{{colors.terminal_normal_white.default.hex}}"
+subtext0  = "{{colors.terminal_bright_black.default.hex}}"
+
+# Surface shades
+overlay2  = "{{colors.terminal_bright_black.default.hex}}"
+overlay1  = "{{colors.terminal_bright_black.default.hex}}"
+overlay0  = "{{colors.terminal_normal_black.default.hex}}"
+surface2  = "{{colors.terminal_normal_black.default.hex}}"
+surface1  = "{{colors.terminal_normal_black.default.hex}}"
+surface0  = "{{colors.terminal_background.default.hex}}"
+base      = "{{colors.terminal_background.default.hex}}"
+mantle    = "{{colors.terminal_background.default.hex}}"
+crust     = "{{colors.terminal_background.default.hex}}"

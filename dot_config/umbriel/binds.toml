@@ -1,0 +1,190 @@
+[keybinds]
+
+# ===== 应用启动 / 面板 =====
+"Mod+T" = "spawn:kitty"
+"Mod+E" = "spawn:nautilus"
+"Mod+W" = "spawn:noctalia msg panel-toggle wallpaper"
+"Mod+Shift+W" = "spawn:noctalia msg panel-toggle tadomika_ari/w-engine:w-engine-panel"
+"Mod+Shift+C" = "spawn:noctalia msg panel-toggle yuuto/calculator:panel"
+"Mod+S" = "spawn:noctalia msg settings-toggle"
+"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+"Mod+Grave" = { action = "spawn:vicinae toggle", repeat = false }
+"Mod+V" = { action = "spawn:cliphist list | vicinae dmenu | cliphist decode | wl-copy", repeat = false }
+"Mod+P" = { action = "spawn:vicinae vicinae://launch/clipboard/history", repeat = false }
+
+# ===== 工具 / 终端 =====
+"Mod+F4" = "spawn:pkill -x noctalia; noctalia -d"
+"Ctrl+Shift+Grave" = "spawn:kitty -e btop"
+
+# ===== 关闭窗口 =====
+"Mod+Q" = "window-close"
+
+# ===== 便签区 Scratchpad =====
+"Mod+Shift+Space" = "window-move-to-scratchpad"
+"Mod+Space" = "scratchpad-toggle"
+"Mod+Ctrl+Space" = "window-restore-from-scratchpad"
+"Mod+Tab" = "scratchpad-focus-next"
+
+# ===== 概览 / 速查表 =====
+"Mod+O" = "overview-toggle"
+"Mod+Shift+Slash" = "cheatsheet-toggle"
+
+# ===== 窗口焦点 =====
+"Mod+Left" = "window-focus-left"
+"Mod+Down" = "window-focus-down"
+"Mod+Up" = "window-focus-up"
+"Mod+Right" = "window-focus-right"
+
+"Mod+H" = "window-focus-left"
+"Mod+J" = "window-focus-down"
+"Mod+K" = "window-focus-up"
+"Mod+L" = "window-focus-right"
+
+"Alt+Tab" = "window-focus-next"
+
+# ===== 窗口移动 =====
+"Mod+Ctrl+Left" = "column-move-left"
+"Mod+Ctrl+Down" = "window-move-down"
+"Mod+Ctrl+Up" = "window-move-up"
+"Mod+Ctrl+Right" = "column-move-right"
+
+"Mod+Ctrl+H" = "column-move-left"
+"Mod+Ctrl+J" = "window-move-down"
+"Mod+Ctrl+K" = "window-move-up"
+"Mod+Ctrl+L" = "column-move-right"
+
+# ===== 显示器焦点 =====
+"Mod+Shift+Left" = "output-focus-left"
+"Mod+Shift+Down" = "output-focus-down"
+"Mod+Shift+Up" = "output-focus-up"
+"Mod+Shift+Right" = "output-focus-right"
+
+"Mod+Shift+H" = "output-focus-left"
+"Mod+Shift+J" = "output-focus-down"
+"Mod+Shift+K" = "output-focus-up"
+"Mod+Shift+L" = "output-focus-right"
+
+# ===== 窗口移动到其他显示器 =====
+"Mod+Ctrl+Shift+Left" = "column-move-to-output-left"
+"Mod+Ctrl+Shift+Down" = "column-move-to-output-down"
+"Mod+Ctrl+Shift+Up" = "column-move-to-output-up"
+"Mod+Ctrl+Shift+Right" = "column-move-to-output-right"
+
+"Mod+Ctrl+Shift+H" = "column-move-to-output-left"
+"Mod+Ctrl+Shift+J" = "column-move-to-output-down"
+"Mod+Ctrl+Shift+K" = "column-move-to-output-up"
+"Mod+Ctrl+Shift+L" = "column-move-to-output-right"
+
+# ===== 工作区切换 =====
+"Mod+Page_Down" = "workspace-next"
+"Mod+Page_Up" = "workspace-previous"
+"Mod+U" = "workspace-next"
+"Mod+I" = "workspace-previous"
+
+"Mod+1" = "workspace-switch:1"
+"Mod+2" = "workspace-switch:2"
+"Mod+3" = "workspace-switch:3"
+"Mod+4" = "workspace-switch:4"
+"Mod+5" = "workspace-switch:5"
+"Mod+6" = "workspace-switch:6"
+"Mod+7" = "workspace-switch:7"
+"Mod+8" = "workspace-switch:8"
+"Mod+9" = "workspace-switch:9"
+
+# ===== 把窗口移到其他工作区 =====
+"Mod+Ctrl+Page_Down" = "window-move-to-workspace-next"
+"Mod+Ctrl+Page_Up" = "window-move-to-workspace-previous"
+"Mod+Ctrl+U" = "window-move-to-workspace-next"
+"Mod+Ctrl+I" = "window-move-to-workspace-previous"
+
+"Mod+Ctrl+1" = "window-move-to-workspace:1"
+"Mod+Ctrl+2" = "window-move-to-workspace:2"
+"Mod+Ctrl+3" = "window-move-to-workspace:3"
+"Mod+Ctrl+4" = "window-move-to-workspace:4"
+"Mod+Ctrl+5" = "window-move-to-workspace:5"
+"Mod+Ctrl+6" = "window-move-to-workspace:6"
+"Mod+Ctrl+7" = "window-move-to-workspace:7"
+"Mod+Ctrl+8" = "window-move-to-workspace:8"
+"Mod+Ctrl+9" = "window-move-to-workspace:9"
+
+# ===== 滚轮 =====
+"Mod+WheelDown" = "workspace-next"
+"Mod+WheelUp" = "workspace-previous"
+
+"Mod+Ctrl+WheelDown" = "window-move-to-workspace-next"
+"Mod+Ctrl+WheelUp" = "window-move-to-workspace-previous"
+
+"Mod+WheelLeft" = "window-focus-left"
+"Mod+WheelRight" = "window-focus-right"
+
+"Mod+Ctrl+WheelLeft" = "column-move-left"
+"Mod+Ctrl+WheelRight" = "column-move-right"
+
+# ===== 布局：吞噬 / 弹出 / 宽度 =====
+"Mod+BracketLeft" = "window-consume-left"
+"Mod+BracketRight" = "window-expel-right"
+
+"Mod+R" = "window-cycle-width"
+"Mod+Minus" = "window-modify-width:-0.1"
+"Mod+Equal" = "window-modify-width:0.1"
+"Mod+C" = "window-center"
+
+# ===== 浮动 / 固定 / 最大化 =====
+"Mod+F" = "window-toggle-floating"
+"Mod+Shift+F" = "window-toggle-floating"
+"Mod+Shift+N" = "window-toggle-pinned"
+"Mod+M" = "window-toggle-maximize"
+"Mod+Shift+M" = "window-toggle-maximize-to-edges"
+
+# ===== 截图 =====
+"Print" = "spawn:noctalia msg screenshot-fullscreen"
+"Ctrl+1" = "spawn:noctalia msg screenshot-region"
+"Ctrl+Print" = "spawn:grim"
+"Alt+Print" = "spawn:grim -g \"$(slurp)\""
+
+"Mod+Shift+Ctrl+Alt+Left" = "workspace-move-to-output-left"
+"Mod+Shift+Ctrl+Alt+Down" = "workspace-move-to-output-down"
+"Mod+Shift+Ctrl+Alt+Up" = "workspace-move-to-output-up"
+"Mod+Shift+Ctrl+Alt+Right" = "workspace-move-to-output-right"
+
+"Mod+Shift+Ctrl+Alt+H" = "workspace-move-to-output-left"
+"Mod+Shift+Ctrl+Alt+J" = "workspace-move-to-output-down"
+"Mod+Shift+Ctrl+Alt+K" = "workspace-move-to-output-up"
+"Mod+Shift+Ctrl+Alt+L" = "workspace-move-to-output-right"
+
+# ===== 多媒体 / 亮度 =====
+"XF86AudioRaiseVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"
+"XF86AudioLowerVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"
+"XF86AudioMute" = "spawn:wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+"XF86AudioMicMute" = "spawn:wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+"XF86MonBrightnessUp" = "spawn:brightnessctl --class=backlight set +10%"
+"XF86MonBrightnessDown" = "spawn:brightnessctl --class=backlight set 10%-"
+
+# ===== 会话 / 退出 =====
+"Mod+Ctrl+R" = "config-reload"
+"Mod+Shift+E" = "session-quit"
+"Ctrl+Alt+Delete" = "session-quit"
+"Mod+Shift+P" = "spawn:poweroff"
+
+# =====================================================================
+# 以下为已注释（禁用）的示例绑定，仅作参考，不参与加载
+# =====================================================================
+
+# --- Scratchpad 指定输出 ---
+# "Mod+0" = "scratchpad-toggle:DP-1"
+# "Mod+Shift+0" = "window-move-to-scratchpad:DP-1"
+# "Mod+Ctrl+0" = "window-restore-from-scratchpad:DP-1"
+# "Mod+Alt+0" = "scratchpad-focus-next:DP-1"
+
+# --- 键盘布局切换 ---
+# "Mod+Shift+K" = "keyboard-layout-next"
+
+# --- 其他示例 ---
+# "Mod+Comma" = "workspace-previous"
+# "Mod+Period" = "workspace-next"
+# "Mod+Shift+Comma" = "window-move-to-workspace-previous"
+# "Mod+Shift+Period" = "window-move-to-workspace-next"
+# "Mod+Ctrl+H" = "output-focus-left"
+# "Mod+Minus" = "window-modify-width:-0.1"
+# "Mod+C" = "window-center"
+# "Mod+Shift+T" = "workspace-set-layout:toggle"

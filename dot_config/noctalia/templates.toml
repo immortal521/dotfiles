@@ -1,0 +1,19 @@
+[theme.templates.user.starship]
+input_path = "$XDG_CONFIG_HOME/starship/starship_template.toml"
+output_path = "$XDG_CONFIG_HOME/starship/starship.toml"
+
+[theme.templates.user.fcitx5_theme]
+index = 0
+input_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/theme_template.conf"
+output_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/theme.conf"
+
+[theme.templates.user.fcitx5_panel]
+index = 1
+input_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/panel_template.svg"
+output_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/panel.svg"
+
+[theme.templates.user.fcitx5_highlight]
+index = 2
+input_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/highlight_template.svg"
+output_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/highlight.svg"
+post_hook = "if pgrep -x fcitx5 >/dev/null 2>&1; then pkill -x fcitx5; sleep 1; fcitx5 -d >/dev/null 2>&1 & fi"

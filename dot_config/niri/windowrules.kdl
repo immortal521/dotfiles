@@ -1,0 +1,304 @@
+// =====================================================
+// 基础窗口样式
+// =====================================================
+
+window-rule {
+  geometry-corner-radius 16
+  clip-to-geometry true
+  tiled-state true
+  draw-border-with-background false
+}
+
+blur {
+  passes 3
+  offset 2.3
+  noise 0.001
+  saturation 2
+}
+
+
+// =====================================================
+// 桌面组件
+// =====================================================
+
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  
+  background-effect {
+    blur true
+    xray false
+  }
+
+  open-floating true
+
+  default-column-width {
+    proportion 0.8
+  }
+
+  default-window-height {
+    proportion 0.9
+  }
+}
+
+
+// =====================================================
+// 默认毛玻璃应用
+// =====================================================
+
+window-rule {
+  match app-id=r"^com\.mitchellh\.ghostty$"
+  match app-id="^neovide$"
+  match app-id="obsidian"
+  match app-id=r"^org\.gnome\.Nautilus$"
+
+  background-effect {
+    blur true
+  }
+}
+
+window-rule {
+  match app-id="obsidian"
+  match app-id=r"^org\.gnome\.Nautilus$"
+
+  opacity 0.9
+
+  background-effect {
+    xray true
+  }
+}
+
+
+// =====================================================
+// 终端 / 浏览器
+// =====================================================
+
+window-rule {
+  match app-id=r"^org\.wezfurlong\.wezterm$"
+
+  default-column-width
+}
+
+window-rule {
+  match app-id=r"^gnome-control-center$"
+  match app-id=r"^pavucontrol$"
+  match app-id=r"^nm-connection-editor$"
+
+  default-column-width {
+    proportion 0.5
+  }
+
+  open-floating false
+}
+
+
+// =====================================================
+// 系统工具浮动
+// =====================================================
+
+window-rule {
+  match app-id=r"^org\.gnome\.Calculator$"
+  match app-id=r"^gnome-calculator$"
+  match app-id=r"^galculator$"
+  match app-id=r"^blueman-manager$"
+  match app-id=r"^xdg-desktop-portal$"
+
+  open-floating true
+}
+
+
+// =====================================================
+// 隐私安全
+// =====================================================
+
+window-rule {
+  match app-id=r"^org\.keepassxc\.KeePassXC$"
+  match app-id=r"^org\.gnome\.World\.Secrets$"
+
+  block-out-from "screencast"
+}
+
+
+// =====================================================
+// 通用画中画
+// =====================================================
+
+window-rule {
+  match title=r"(画中画|Picture-in-Picture)"
+  open-floating true
+  opacity 1.0
+  default-column-width
+  default-window-height
+  default-floating-position x=20 y=20 relative-to="bottom-right"
+}
+
+
+// =====================================================
+// 图片 / 视频查看
+// =====================================================
+
+window-rule {
+  match title=r"(图片查看器|Image Viewer|图片和视频|Image and Video Viewer|视频播放器|Video Player|Videos)"
+
+  match app-id="org.gnome.Loupe"
+  match app-id="org.gnome.Totem"
+  match app-id="org.gnome.Photos"
+
+  open-floating true
+  opacity 1.0
+}
+
+window-rule {
+  match app-id="imv"
+
+  open-floating true
+}
+
+
+// =====================================================
+// 媒体软件
+// =====================================================
+
+window-rule {
+  match app-id="org.kde.kdenlive"
+  match app-id="mpv"
+  match app-id="kazumi"
+  match app-id="celluloid"
+  match app-id="virt-manager"
+
+  opacity 1.0
+}
+
+
+// =====================================================
+// 游戏 / 高性能窗口
+// =====================================================
+
+window-rule {
+  match app-id=r"^steam_app_.*"
+  match app-id=r"^gamescope$"
+  match app-id=r"^wine$"
+  match title=r"(?i)genshin impact|zenless zone zero|victoria 3|Minecraft|Endfield"
+
+  opacity 1.0
+
+  background-effect {
+    blur false
+  }
+
+  draw-border-with-background false
+}
+
+
+// =====================================================
+// Steam
+// =====================================================
+
+window-rule {
+  match app-id=r"^steam$" title=r"^notificationtoasts_\d+_desktop$"
+
+  default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+window-rule {
+  match app-id="steam" title="Friends List"
+
+  default-column-width {
+    proportion 0.20
+  }
+}
+
+window-rule {
+  match app-id="steam" title="好友列表"
+
+  default-column-width {
+    proportion 0.20
+  }
+}
+
+
+// =====================================================
+// QQ / 微信 / 小窗口
+// =====================================================
+
+window-rule {
+  match app-id="^QQ$"
+  match app-id="^wechat$" title="^图片和视频$"
+  match app-id="^org.fcitx.fcitx5-config-qt$" title="^经典用户界面 — Fcitx 配置$"
+  match app-id="^com.gabm.satty$"
+
+  exclude app-id="^QQ$" title="^QQ$"
+
+  open-floating true
+  open-maximized false
+
+  default-column-width {
+    proportion 0.75
+  }
+
+  default-window-height {
+    fixed 700
+  }
+}
+
+window-rule {
+  match app-id="QQ" title="资料卡"
+
+  open-focused false
+}
+
+window-rule {
+  match app-id="QQ" title="天气"
+
+  open-focused false
+}
+
+window-rule {
+  match app-id="QQ" title="群聊的聊天记录"
+
+  open-floating true
+}
+
+
+
+// =====================================================
+// 网络工具 / 音乐
+// =====================================================
+
+window-rule {
+  match app-id="^com.follow.clash$" title="^FlClash$"
+
+  open-maximized false
+
+  default-column-width {
+    proportion 0.33333
+  }
+}
+
+window-rule {
+  match app-id="^qqmusic$" title="^qqmusic$"
+
+  open-maximized false
+
+  default-column-width {
+    proportion 0.66667
+  }
+}
+
+
+// =====================================================
+// 特殊应用
+// =====================================================
+
+window-rule {
+  match app-id="io.ente.auth"
+
+  open-floating true
+
+  default-column-width {
+    fixed 532
+  }
+
+  default-window-height {
+    fixed 925
+  }
+}

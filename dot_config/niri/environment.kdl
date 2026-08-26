@@ -1,0 +1,27 @@
+// === 环境变量配置 ===
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+  XDG_SESSION_TYPE "wayland"
+
+  // 平台与输入法框架
+  ELECTRON_OZONE_PLATFORM_HINT "wayland"
+  XMODIFIERS "@im=fcitx"
+  QT_IM_MODULES "wayland;fcitx"
+  SDL_IM_MODULE null
+  GLFW_IM_MODULE null
+
+  // QT 界面与主题主题
+  QT_QPA_PLATFORM "wayland"
+  QT_QPA_PLATFORMTHEME "qt6ct"
+  QT_WAYLAND_DISABLE_WINDOWECORATION "1"
+
+  // 鼠标光标主题与大小
+  XCURSOR_THEME "phinger-cursors-light"
+  XCURSOR_SIZE "32"
+
+  GBM_BACKEND "nvidia-drm"
+  __GLX_VENDOR_LIBRARY_NAME "nvidia"
+  LIBVA_DRIVER_NAME "nvidia"
+
+  GTK_SCALE "2"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vicinae.com/schemas/config.json",
+  "font": {
+    "normal": {
+      "family": "Maple Mono NF CN"
+    }
+  },
+  "theme": {
+    "dark": {
+      "name": "noctalia"
+    }
+  },
+  "telemetry": {
+    "system_info": false
+  },
+  "providers": {
+    "clipboard": {
+      "preferences": {
+        "encryption": true,
+        "eraseOnStartup": false,
+        "ignorePasswords": true,
+        "monitoring": true
+      }
+    }
+  }
+}
