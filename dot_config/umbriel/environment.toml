@@ -2,11 +2,13 @@
 XDG_CURRENT_DESKTOP = "umbriel"
 XDG_SESSION_TYPE = "wayland"
 # 平台与输入法框架
-ELECTRON_OZONE_PLATFORM_HINT = "wayland"
 XMODIFIERS = "@im=fcitx"
 QT_IM_MODULES = "wayland;fcitx"
 # SDL_IM_MODULE null
 # GLFW_IM_MODULE null
+
+# 38.0 removed
+ELECTRON_OZONE_PLATFORM_HINT = "wayland"
 
 # QT 界面与主题主题
 QT_QPA_PLATFORM = "wayland"

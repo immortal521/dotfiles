@@ -131,7 +131,7 @@
 
 # ===== 浮动 / 固定 / 最大化 =====
 "Mod+F" = "window-toggle-floating"
-"Mod+Shift+F" = "window-toggle-floating"
+"Mod+Shift+F" = "window-toggle-fullscreen"
 "Mod+Shift+N" = "window-toggle-pinned"
 "Mod+M" = "window-toggle-maximize"
 "Mod+Shift+M" = "window-toggle-maximize-to-edges"

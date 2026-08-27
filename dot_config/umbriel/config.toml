@@ -1,5 +1,6 @@
 [include]
 files = [
+  "animation.toml",
   "appearance.toml",
   "binds.toml",
   "environment.toml",
@@ -23,5 +24,5 @@ autostart = [
 
 xwayland = true                # requires restart to change
 show_cheatsheet = false        # show keybinds overlay on startup
-focus_on_activate = false      # activation requests mark urgent without stealing focus
+focus_on_activate = true       # activation requests mark urgent without stealing focus
 honor_restored_maximize = true

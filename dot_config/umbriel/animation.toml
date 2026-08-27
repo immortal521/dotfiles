@@ -1,0 +1,57 @@
+[animation]
+enabled = true
+duration_ms = 350
+curve = "easeout"
+
+[animation.windows_in]
+enabled = true
+duration_ms = 350
+curve = "easeout"
+style = "fade"    # "popin", "zoom", "slide", "fade", or "none"
+
+[animation.windows_out]
+enabled = true
+duration_ms = 350
+curve = "easeout"
+style = "fade"    # "fade" or "slide"
+
+[animation.windows_move]
+enabled = true
+duration_ms = 350
+curve = "snappy"
+
+[animation.workspaces]
+enabled = true
+duration_ms = 300
+curve = "easeout"
+
+[animation.overview]
+enabled = true
+duration_ms = 300
+curve = "easeout"
+
+[animation.scratchpad]
+enabled = true
+duration_ms = 350
+curve = "easeout"
+dim = 0.6          # 0.0-1.0
+blur = true        # requires appearance.blur.enabled
+scale = 0.8        # 0 preserves geometry; 0.1-1.0 sizes and centers on entry
+maximize = false   # maximize to edges on entry
+fullscreen = false # fullscreen on entry
+
+[animation.border]
+enabled = true
+duration_ms = 350
+curve = "easeout"
+
+[animation.dim_unfocused]
+enabled = true
+duration_ms = 350
+curve = "easeout"
+dim = 0.2         # 0.0-1.0
+
+[animation.layers]
+enabled = true
+duration_ms = 350
+curve = "easeout"
