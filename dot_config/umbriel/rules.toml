@@ -79,13 +79,20 @@ match.title = "^(Open File|Select|Choose a wallpaper|Open Folder|Save As|Library
 default_floating = true
 blur_optimized = false
 
+[[window_rule]]
+match.app_id = "^xdg-desktop-portal-gtk$"
+match.title = "^(File Upload|打开文件$|flutter picker$)"
+default_floating = true
+default_size = [1000, 750]
+blur_optimized = false
+
 # [[window_rule]]
 # match.app_id = "^zen$"
 # match.title = "^(扩展：|Extension:)"
 # default_floating = true
 # default_size = [400, 800]
 # default_position = { x = 0, y = 0 }
-
+#
 # [[window_rule]]
 # match.app_id = "org\\.localsend\\.localsend_app"
 # match.title = "LocalSend"
@@ -131,6 +138,11 @@ default_floating = true
 default_maximize = false
 default_width = 0.75
 blur_optimized = false
+
+
+[[window_rule]]
+match.app_id = "^QQ$"
+match.title = "^QQ$"
 
 [[window_rule]]
 match.app_id = "^QQ$"
