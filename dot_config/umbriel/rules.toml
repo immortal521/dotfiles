@@ -27,6 +27,7 @@ blur_popups = false
 [[window_rule]]
 match.app_id = "^dev\\.noctalia\\.UmbrielSharePicker$"
 default_floating = true
+blur_optimized = false
 default_size = [800, 600]
 
 # ============================================================
@@ -60,24 +61,37 @@ blur = false
 [[window_rule]]
 match.app_id = "^(gnome-control-center|pavucontrol|nm-connection-editor)$"
 default_width = 0.5
-default_floating = false
+default_floating = true
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^(org\\.gnome\\.Calculator|gnome-calculator|galculator|blueman-manager|xdg-desktop-portal)$"
 default_floating = true
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^imv$"
 default_floating = true
+blur_optimized = false
 
 [[window_rule]]
 match.title = "^(Open File|Select|Choose a wallpaper|Open Folder|Save As|Library|Choose Where to Download|File Operation Progress|Rename|Copy Files|Move Files|Search Files)$"
 default_floating = true
+blur_optimized = false
 
 # [[window_rule]]
 # match.app_id = "^zen$"
 # match.title = "^(扩展：|Extension:)"
 # default_floating = true
+# default_size = [400, 800]
+# default_position = { x = 0, y = 0 }
+
+# [[window_rule]]
+# match.app_id = "org\\.localsend\\.localsend_app"
+# match.title = "LocalSend"
+# default_floating = true
+# default_size = [300, 800]
+
 
 # ============================================================
 # 画中画 / 媒体查看器 (Picture-in-Picture & media viewers)
@@ -106,6 +120,7 @@ opacity = 1.0
 match.app_id = "^wechat$"
 match.title = "^图片和视频$"
 default_floating = true
+opacity = 1.0
 default_maximize = false
 default_width = 0.75
 
@@ -115,20 +130,19 @@ match.title = "^Fcitx 配置$"
 default_floating = true
 default_maximize = false
 default_width = 0.75
-
-[[window_rule]]
-match.app_id = "^QQ$"
-match.title = "^QQ$"
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^QQ$"
 match.title = "^(资料卡|天气)$"
 default_focused = false
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^QQ$"
 match.title = "^群聊的聊天记录$"
 default_floating = true
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^qqmusic$"
@@ -140,6 +154,7 @@ default_width = 0.66667
 match.app_id = "^io\\.ente\\.auth$"
 default_floating = true
 default_size = [532, 925]
+blur_optimized = false
 
 # ============================================================
 # Steam 专属 (Steam-specific)
@@ -149,6 +164,7 @@ match.app_id = "^steam$"
 match.title = "^notificationtoasts_\\d+_desktop$"
 default_position = { x = 10, y = 10, anchor = "bottom_right" }
 default_focused = false
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^steam$"
@@ -164,11 +180,13 @@ match.title = "^FlClash$"
 default_maximize = false
 opacity = 0.8
 default_width = 0.33333
+blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^dev\\.lemmy\\.swash$"
 default_floating = true
 default_size = [1000, 900]
+blur_optimized = false
 
 # ============================================================
 # 图层规则 (Layer rules) — 状态栏 / 通知 / 面板 / OSD 等

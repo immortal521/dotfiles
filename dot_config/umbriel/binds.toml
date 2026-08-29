@@ -125,6 +125,7 @@
 "Mod+BracketRight" = "window-expel-right"
 
 "Mod+R" = "window-cycle-width"
+# "Mod+Shift+R" = "window-cycle-height"
 "Mod+Minus" = "window-modify-width:-0.1"
 "Mod+Equal" = "window-modify-width:0.1"
 "Mod+C" = "window-center"
