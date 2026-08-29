@@ -1,5 +1,5 @@
 [layout]
-mode = "scrolling"                     # "scrolling" or "dwindle"
+mode = "scrolling"                     # "scrolling" or "dwindle" or "master"
 gap = 4                                # 0-500
 width_presets = [0.333, 0.5, 0.667, 1] # shared by scrolling and dwindle
 

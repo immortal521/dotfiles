@@ -17,7 +17,7 @@ style = "fade"    # "fade" or "slide"
 
 [animation.windows_move]
 enabled = true
-duration_ms = 350
+duration_ms = 400
 curve = "snappy"
 
 [animation.workspaces]

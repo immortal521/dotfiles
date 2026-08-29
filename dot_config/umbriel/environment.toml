@@ -1,6 +1,6 @@
 [environment]
-XDG_CURRENT_DESKTOP = "umbriel"
-XDG_SESSION_TYPE = "wayland"
+# XDG_CURRENT_DESKTOP = "umbriel"
+# XDG_SESSION_TYPE = "wayland"
 # 平台与输入法框架
 XMODIFIERS = "@im=fcitx"
 QT_IM_MODULES = "wayland;fcitx"

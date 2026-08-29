@@ -162,16 +162,13 @@ default_width = 0.20
 match.app_id = "^com\\.follow\\.clash$"
 match.title = "^FlClash$"
 default_maximize = false
+opacity = 0.8
 default_width = 0.33333
 
 [[window_rule]]
 match.app_id = "^dev\\.lemmy\\.swash$"
 default_floating = true
 default_size = [1000, 900]
-
-# ============================================================
-# 已禁用 / 实验性 (Disabled / experimental)
-# ============================================================
 
 # ============================================================
 # 图层规则 (Layer rules) — 状态栏 / 通知 / 面板 / OSD 等
