@@ -17,3 +17,8 @@ index = 2
 input_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/highlight_template.svg"
 output_path = "$XDG_DATA_HOME/fcitx5/themes/veyra/highlight.svg"
 post_hook = "if pgrep -x fcitx5 >/dev/null 2>&1; then pkill -x fcitx5; sleep 1; fcitx5 -d >/dev/null 2>&1 & fi"
+
+[theme.templates.user.nvim]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim/color"
+output_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim/color-final"
+post_hook = "bash $XDG_CONFIG_HOME/noctalia/templates/nvim/apply.sh"
