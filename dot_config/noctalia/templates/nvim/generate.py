@@ -3,10 +3,11 @@ import colorsys
 import json
 
 
+# --- 颜色转换基础函数 ---
+
+
 def hex_to_rgb(hex_str):
     hex_str = hex_str.lstrip("#")
-    if len(hex_str) != 6:
-        raise ValueError(f"Invalid HEX color: {hex_str}")
     return tuple(int(hex_str[i : i + 2], 16) / 255.0 for i in (0, 2, 4))
 
 
@@ -27,38 +28,9 @@ def hsl_to_hex(hsl):
     return rgb_to_hex((r, g, b))
 
 
-# --- 颜色变换工具 ---
-
-
-def rotate_hue(hex_str, degree):
-    h, s, l = hex_to_hsl(hex_str)
-    return hsl_to_hex([(h + degree) % 360, s, l])
-
-
-def set_lightness(hex_str, lightness):
-    h, s, _ = hex_to_hsl(hex_str)
-    return hsl_to_hex([h, s, max(0, min(100, lightness))])
-
-
-def darken(hex_str, amount):
-    h, s, l = hex_to_hsl(hex_str)
-    return hsl_to_hex([h, s, max(0, l - amount)])
-
-
-def lighten(hex_str, amount):
-    h, s, l = hex_to_hsl(hex_str)
-    return hsl_to_hex([h, s, min(100, l + amount)])
-
-
-def desaturate(hex_str, amount):
-    h, s, l = hex_to_hsl(hex_str)
-    return hsl_to_hex([h, max(0, s - amount), l])
-
-
 def blend(hex_str1, hex_str2, alpha):
     r1, g1, b1 = hex_to_rgb(hex_str1)
     r2, g2, b2 = hex_to_rgb(hex_str2)
-
     return rgb_to_hex(
         (
             r1 * alpha + r2 * (1 - alpha),
@@ -68,270 +40,204 @@ def blend(hex_str1, hex_str2, alpha):
     )
 
 
-def generate_harmonized_palette(primary_hex):
-    h, s, l = hex_to_hsl(primary_hex)
-
-    # 提取基准饱和度，确保语义色不会过淡或过艳
-    base_s = max(60.0, min(s, 80.0))
-
-    # 锚定固定语义色相 (Hue)
-    # Red: ~5°, Yellow/Amber: ~40°, Green: ~135°, Cyan/Blue: ~200°
-    hue_red = 5
-    hue_yellow = 40
-    hue_green = 135
-    hue_cyan = 185
-
-    return {
-        "primary": {
-            "dark": hsl_to_hex([h, base_s, 68]),
-            "light": hsl_to_hex([h, base_s, 42]),
-        },
-        "primary_fixed": {
-            "dark": hsl_to_hex([h, base_s + 10, 82]),
-            "light": hsl_to_hex([h, base_s + 10, 88]),
-        },
-        "primary_container": {
-            "dark": hsl_to_hex([h, base_s - 15, 25]),
-            "light": hsl_to_hex([h, base_s - 15, 90]),
-        },
-        "secondary": {
-            "dark": hsl_to_hex([(h + 25) % 360, base_s - 10, 65]),
-            "light": hsl_to_hex([(h + 25) % 360, base_s - 10, 40]),
-        },
-        "secondary_fixed": {
-            "dark": hsl_to_hex([(h + 25) % 360, base_s, 78]),
-            "light": hsl_to_hex([(h + 25) % 360, base_s, 88]),
-        },
-        "tertiary": {
-            "dark": hsl_to_hex([(h - 25) % 360, base_s - 5, 70]),
-            "light": hsl_to_hex([(h - 25) % 360, base_s - 5, 45]),
-        },
-        # 语义固定色定义
-        "semantic": {
-            "red": {
-                "dark": hsl_to_hex([hue_red, base_s, 65]),
-                "light": hsl_to_hex([hue_red, base_s + 10, 42]),
-            },
-            "yellow": {
-                "dark": hsl_to_hex([hue_yellow, base_s, 68]),
-                "light": hsl_to_hex([hue_yellow, base_s + 15, 38]),
-            },
-            "green": {
-                "dark": hsl_to_hex([hue_green, base_s - 10, 62]),
-                "light": hsl_to_hex([hue_green, base_s - 5, 36]),
-            },
-            "cyan": {
-                "dark": hsl_to_hex([hue_cyan, base_s - 5, 66]),
-                "light": hsl_to_hex([hue_cyan, base_s, 38]),
-            },
-        },
-        "surface": {
-            "dark": hsl_to_hex([h, 8, 11]),
-            "light": hsl_to_hex([h, 8, 97]),
-        },
-        "surface_container_lowest": {
-            "dark": hsl_to_hex([h, 10, 8]),
-            "light": hsl_to_hex([h, 8, 100]),
-        },
-        "surface_container_low": {
-            "dark": hsl_to_hex([h, 8, 13]),
-            "light": hsl_to_hex([h, 8, 94]),
-        },
-        "surface_container": {
-            "dark": hsl_to_hex([h, 8, 16]),
-            "light": hsl_to_hex([h, 8, 91]),
-        },
-        "surface_container_high": {
-            "dark": hsl_to_hex([h, 8, 19]),
-            "light": hsl_to_hex([h, 8, 87]),
-        },
-        "surface_container_highest": {
-            "dark": hsl_to_hex([h, 8, 23]),
-            "light": hsl_to_hex([h, 8, 83]),
-        },
-        "on_surface": {
-            "dark": hsl_to_hex([h, 5, 90]),
-            "light": hsl_to_hex([h, 10, 15]),
-        },
-        "on_surface_variant": {
-            "dark": hsl_to_hex([h, 6, 70]),
-            "light": hsl_to_hex([h, 8, 38]),
-        },
-        "outline": {
-            "dark": hsl_to_hex([h, 8, 48]),
-            "light": hsl_to_hex([h, 8, 52]),
-        },
-        "outline_variant": {
-            "dark": hsl_to_hex([h, 8, 28]),
-            "light": hsl_to_hex([h, 8, 75]),
-        },
-    }
+# --- 核心：解耦基调色与标准颜色 ---
 
 
 def build_theme(primary_hex):
-    c = generate_harmonized_palette(primary_hex)
+    p_h, p_s, p_l = hex_to_hsl(primary_hex)
 
-    # 快捷别名提取语义色彩
-    sem = c["semantic"]
+    # 1. 提取基调色（Primary / Accent）及其变体
+    # 暗色模式下的主色变体
+    p_dark_base = hsl_to_hex([p_h, max(50.0, p_s), 75])
+    p_dark_dim = hsl_to_hex([p_h, max(40.0, p_s * 0.8), 58])
+    p_dark_bright = hsl_to_hex([p_h, max(60.0, p_s), 85])
 
-    red_d, red_l = sem["red"]["dark"], sem["red"]["light"]
-    yellow_d, yellow_l = sem["yellow"]["dark"], sem["yellow"]["light"]
-    green_d, green_l = sem["green"]["dark"], sem["green"]["light"]
-    cyan_d, cyan_l = sem["cyan"]["dark"], sem["cyan"]["light"]
+    # 亮色模式下的主色变体
+    p_light_base = hsl_to_hex([p_h, max(50.0, p_s), 45])
+    p_light_dim = hsl_to_hex([p_h, max(40.0, p_s * 0.8), 35])
+    p_light_bright = hsl_to_hex([p_h, max(60.0, p_s), 55])
+
+    # 2. 独立的标准语义色彩（标准 Hue，不受 primary 拖累）
+    hue_blue = 210
+    hue_cyan = 185
+    hue_green = 135
+    hue_yellow = 40
+    hue_orange = 25
+    hue_red = 5
+    hue_purple = 270
+    hue_pink = 330
 
     return {
         "dark": {
-            "bg": c["surface"]["dark"],
-            "bg_dim": c["surface_container_low"]["dark"],
-            "bg_deep": c["surface_container_lowest"]["dark"],
-            "bg_highlight": c["surface_container_high"]["dark"],
-            "bg_search": blend(
-                c["primary_container"]["dark"],
-                c["surface"]["dark"],
-                0.6,
-            ),
-            "fg": c["on_surface"]["dark"],
-            "fg_muted": c["on_surface_variant"]["dark"],
-            "fg_gutter": c["outline_variant"]["dark"],
-            "fg_dark": c["outline"]["dark"],
-            "border": blend(
-                c["outline_variant"]["dark"],
-                c["surface"]["dark"],
-                0.5,
-            ),
-            "border_highlight": c["primary"]["dark"],
-            "selection": c["surface_container_highest"]["dark"],
-            "cursor_line": c["surface_container"]["dark"],
+            # ===== 新增：专门围绕基调色的字段 =====
+            "primary": p_dark_base,
+            "primary_dim": p_dark_dim,
+            "primary_bright": p_dark_bright,
+            # ===== 背景与基础 UI =====
+            "bg": hsl_to_hex([p_h, 10, 11]),  # 微微带有基调色调的深暗背景
+            "bg_dim": hsl_to_hex([p_h, 10, 13]),
+            "bg_deep": hsl_to_hex([p_h, 10, 8]),
+            "bg_highlight": hsl_to_hex([p_h, 10, 19]),
+            "bg_search": hsl_to_hex([p_h, 30, 20]),
+            "fg": hsl_to_hex([p_h, 5, 90]),
+            "fg_muted": hsl_to_hex([p_h, 5, 70]),
+            "fg_gutter": hsl_to_hex([p_h, 5, 30]),
+            "fg_dark": hsl_to_hex([p_h, 5, 48]),
+            "border": hsl_to_hex([p_h, 8, 20]),
+            "border_highlight": p_dark_base,
+            "selection": hsl_to_hex([p_h, 10, 23]),
+            "cursor_line": hsl_to_hex([p_h, 10, 16]),
             "float": {
-                "bg": c["surface_container_low"]["dark"],
-                "fg": c["on_surface"]["dark"],
-                "border": c["outline_variant"]["dark"],
+                "bg": hsl_to_hex([p_h, 10, 13]),
+                "fg": hsl_to_hex([p_h, 5, 90]),
+                "border": hsl_to_hex([p_h, 5, 30]),
             },
-            # Standard Colors
-            "blue": c["primary"]["dark"],
-            "blue_dim": desaturate(darken(c["primary"]["dark"], 15), 10),
-            "blue_bright": c["primary_fixed"]["dark"],
-            "cyan": cyan_d,
-            "green": green_d,
-            "green_bright": lighten(green_d, 10),
-            "yellow": yellow_d,
-            "orange": rotate_hue(red_d, 25),
-            "red": red_d,
-            "red_dim": darken(red_d, 15),
-            "purple": rotate_hue(c["primary"]["dark"], 25),
-            "pink": rotate_hue(red_d, 330),
-            "comment": c["outline"]["dark"],
-            "terminal_black": c["surface_container_highest"]["dark"],
-            # Extended Palette (Catppuccin Style)
-            "rosewater": rotate_hue(red_d, 15),
-            "flamingo": rotate_hue(red_d, 25),
-            "mauve": rotate_hue(c["primary"]["dark"], 30),
-            "maroon": darken(red_d, 10),
-            "peach": rotate_hue(yellow_d, -15),
-            "teal": rotate_hue(green_d, 30),
-            "sky": rotate_hue(cyan_d, 15),
-            "sapphire": rotate_hue(c["primary"]["dark"], -10),
-            "lavender": rotate_hue(c["primary"]["dark"], 15),
+            # ===== 真正标准的颜色（blue 回归蓝色） =====
+            "blue": hsl_to_hex([hue_blue, 65, 75]),
+            "blue_dim": hsl_to_hex([hue_blue, 50, 60]),
+            "blue_bright": hsl_to_hex([hue_blue, 80, 85]),
+            "cyan": hsl_to_hex([hue_cyan, 55, 68]),
+            "green": hsl_to_hex([hue_green, 50, 65]),
+            "green_bright": hsl_to_hex([hue_green, 60, 75]),
+            "yellow": hsl_to_hex([hue_yellow, 60, 70]),
+            "orange": hsl_to_hex([hue_orange, 60, 70]),
+            "red": hsl_to_hex([hue_red, 65, 68]),
+            "red_dim": hsl_to_hex([hue_red, 60, 50]),
+            "purple": hsl_to_hex([hue_purple, 50, 72]),
+            "pink": hsl_to_hex([hue_pink, 55, 72]),
+            "comment": hsl_to_hex([p_h, 5, 48]),
+            "terminal_black": hsl_to_hex([p_h, 10, 23]),
+            "rosewater": hsl_to_hex([15, 45, 75]),
+            "flamingo": hsl_to_hex([20, 50, 72]),
+            "mauve": hsl_to_hex([260, 45, 75]),
+            "maroon": hsl_to_hex([350, 55, 60]),
+            "peach": hsl_to_hex([30, 60, 72]),
+            "teal": hsl_to_hex([165, 40, 68]),
+            "sky": hsl_to_hex([195, 45, 72]),
+            "sapphire": hsl_to_hex([200, 45, 68]),
+            "lavender": hsl_to_hex([230, 45, 75]),
             "git": {
-                "add": green_d,
-                "change": c["primary"]["dark"],
-                "delete": red_d,
+                "add": hsl_to_hex([hue_green, 50, 65]),
+                "change": p_dark_base,  # Git 修改使用基调色
+                "delete": hsl_to_hex([hue_red, 65, 68]),
             },
-            # 强化强固定的 Diagnostcs (Error=红, Warn=黄, Info=蓝/主色, Hint=绿)
             "diag": {
-                "error": red_d,
-                "warn": yellow_d,
-                "info": c["primary"]["dark"],
-                "hint": green_d,
-                "bg_error": blend(red_d, c["surface"]["dark"], 0.15),
-                "bg_warn": blend(yellow_d, c["surface"]["dark"], 0.15),
-                "bg_info": blend(c["primary"]["dark"], c["surface"]["dark"], 0.15),
-                "bg_hint": blend(green_d, c["surface"]["dark"], 0.15),
+                "error": hsl_to_hex([hue_red, 65, 68]),
+                "warn": hsl_to_hex([hue_yellow, 60, 70]),
+                "info": p_dark_base,  # 诊断 Info 使用基调色
+                "hint": hsl_to_hex([hue_green, 50, 65]),
+                "bg_error": blend(
+                    hsl_to_hex([hue_red, 65, 68]), hsl_to_hex([p_h, 10, 11]), 0.2
+                ),
+                "bg_warn": blend(
+                    hsl_to_hex([hue_yellow, 60, 70]),
+                    hsl_to_hex([p_h, 10, 11]),
+                    0.2,
+                ),
+                "bg_info": blend(p_dark_base, hsl_to_hex([p_h, 10, 11]), 0.2),
+                "bg_hint": blend(
+                    hsl_to_hex([hue_green, 50, 65]),
+                    hsl_to_hex([p_h, 10, 11]),
+                    0.2,
+                ),
             },
             "diff": {
-                "add": blend(green_d, c["surface"]["dark"], 0.20),
-                "change": blend(c["primary"]["dark"], c["surface"]["dark"], 0.20),
-                "delete": blend(red_d, c["surface"]["dark"], 0.20),
-                "text": blend(c["primary"]["dark"], c["surface"]["dark"], 0.40),
+                "add": blend(
+                    hsl_to_hex([hue_green, 50, 65]),
+                    hsl_to_hex([p_h, 10, 11]),
+                    0.25,
+                ),
+                "change": blend(p_dark_base, hsl_to_hex([p_h, 10, 11]), 0.25),
+                "delete": blend(
+                    hsl_to_hex([hue_red, 65, 68]), hsl_to_hex([p_h, 10, 11]), 0.25
+                ),
+                "text": blend(p_dark_base, hsl_to_hex([p_h, 10, 11]), 0.50),
             },
         },
         "light": {
-            "bg": c["surface"]["light"],
-            "bg_dim": c["surface_container_high"]["light"],
-            "bg_deep": c["surface_container_highest"]["light"],
-            "bg_highlight": c["surface_container_low"]["light"],
-            "bg_search": c["primary_container"]["light"],
-            "fg": c["on_surface"]["light"],
-            "fg_muted": c["on_surface_variant"]["light"],
-            "fg_gutter": c["outline"]["light"],
-            "fg_dark": c["outline_variant"]["light"],
-            "border": c["outline_variant"]["light"],
-            "border_highlight": c["primary"]["light"],
-            "selection": c["surface_container_high"]["light"],
-            "cursor_line": c["surface_container_lowest"]["light"],
+            # ===== 亮色模式基调色 =====
+            "primary": p_light_base,
+            "primary_dim": p_light_dim,
+            "primary_bright": p_light_bright,
+            # ===== 背景与基础 UI =====
+            "bg": hsl_to_hex([p_h, 8, 97]),
+            "bg_dim": hsl_to_hex([p_h, 8, 88]),
+            "bg_deep": hsl_to_hex([p_h, 8, 83]),
+            "bg_highlight": hsl_to_hex([p_h, 8, 94]),
+            "bg_search": hsl_to_hex([p_h, 25, 90]),
+            "fg": hsl_to_hex([p_h, 10, 15]),
+            "fg_muted": hsl_to_hex([p_h, 8, 38]),
+            "fg_gutter": hsl_to_hex([p_h, 8, 52]),
+            "fg_dark": hsl_to_hex([p_h, 8, 75]),
+            "border": hsl_to_hex([p_h, 8, 75]),
+            "border_highlight": p_light_base,
+            "selection": hsl_to_hex([p_h, 8, 88]),
+            "cursor_line": hsl_to_hex([p_h, 8, 100]),
             "float": {
-                "bg": c["surface_container_low"]["light"],
-                "fg": c["on_surface"]["light"],
-                "border": c["outline_variant"]["light"],
+                "bg": hsl_to_hex([p_h, 8, 94]),
+                "fg": hsl_to_hex([p_h, 10, 15]),
+                "border": hsl_to_hex([p_h, 8, 75]),
             },
-            # Standard Colors
-            "blue": set_lightness(c["primary"]["light"], 40),
-            "blue_dim": set_lightness(c["primary"]["light"], 30),
-            "blue_bright": set_lightness(c["primary"]["light"], 48),
-            "cyan": cyan_l,
-            "green": green_l,
-            "green_bright": set_lightness(green_l, 30),
-            "yellow": yellow_l,
-            "orange": rotate_hue(red_l, 25),
-            "red": red_l,
-            "red_dim": set_lightness(red_l, 32),
-            "purple": set_lightness(rotate_hue(c["primary"]["light"], 25), 40),
-            "pink": set_lightness(rotate_hue(red_l, 330), 42),
-            "comment": c["outline"]["light"],
-            "terminal_black": c["outline_variant"]["light"],
-            # Extended Palette (Catppuccin Style)
-            "rosewater": rotate_hue(red_l, 15),
-            "flamingo": rotate_hue(red_l, 25),
-            "mauve": set_lightness(rotate_hue(c["primary"]["light"], 30), 40),
-            "maroon": set_lightness(red_l, 35),
-            "peach": rotate_hue(yellow_l, -15),
-            "teal": rotate_hue(green_l, 30),
-            "sky": rotate_hue(cyan_l, 15),
-            "sapphire": set_lightness(rotate_hue(c["primary"]["light"], -10), 38),
-            "lavender": set_lightness(rotate_hue(c["primary"]["light"], 15), 42),
+            # ===== 真正标准的颜色 =====
+            "blue": hsl_to_hex([hue_blue, 50, 42]),
+            "blue_dim": hsl_to_hex([hue_blue, 40, 32]),
+            "blue_bright": hsl_to_hex([hue_blue, 65, 50]),
+            "cyan": hsl_to_hex([hue_cyan, 50, 38]),
+            "green": hsl_to_hex([hue_green, 50, 36]),
+            "green_bright": hsl_to_hex([hue_green, 60, 30]),
+            "yellow": hsl_to_hex([hue_yellow, 65, 38]),
+            "orange": hsl_to_hex([hue_orange, 60, 42]),
+            "red": hsl_to_hex([hue_red, 60, 42]),
+            "red_dim": hsl_to_hex([hue_red, 60, 32]),
+            "purple": hsl_to_hex([hue_purple, 45, 42]),
+            "pink": hsl_to_hex([hue_pink, 50, 44]),
+            "comment": hsl_to_hex([p_h, 8, 52]),
+            "terminal_black": hsl_to_hex([p_h, 8, 75]),
+            "rosewater": hsl_to_hex([15, 45, 47]),
+            "flamingo": hsl_to_hex([20, 50, 47]),
+            "mauve": hsl_to_hex([260, 45, 42]),
+            "maroon": hsl_to_hex([350, 55, 38]),
+            "peach": hsl_to_hex([30, 60, 43]),
+            "teal": hsl_to_hex([165, 40, 38]),
+            "sky": hsl_to_hex([195, 45, 42]),
+            "sapphire": hsl_to_hex([200, 45, 40]),
+            "lavender": hsl_to_hex([230, 45, 44]),
             "git": {
-                "add": green_l,
-                "change": set_lightness(c["primary"]["light"], 40),
-                "delete": red_l,
+                "add": hsl_to_hex([hue_green, 50, 36]),
+                "change": p_light_base,
+                "delete": hsl_to_hex([hue_red, 60, 42]),
             },
-            # 强化强固定的 Diagnostcs (Error=红, Warn=黄, Info=蓝色/主色, Hint=绿)
             "diag": {
-                "error": red_l,
-                "warn": yellow_l,
-                "info": set_lightness(c["primary"]["light"], 38),
-                "hint": green_l,
-                "bg_error": blend(red_l, c["surface"]["light"], 0.12),
-                "bg_warn": blend(yellow_l, c["surface"]["light"], 0.12),
-                "bg_info": blend(
-                    set_lightness(c["primary"]["light"], 38),
-                    c["surface"]["light"],
-                    0.12,
+                "error": hsl_to_hex([hue_red, 60, 42]),
+                "warn": hsl_to_hex([hue_yellow, 65, 38]),
+                "info": p_light_base,
+                "hint": hsl_to_hex([hue_green, 50, 36]),
+                "bg_error": blend(
+                    hsl_to_hex([hue_red, 60, 42]), hsl_to_hex([p_h, 8, 97]), 0.15
                 ),
-                "bg_hint": blend(green_l, c["surface"]["light"], 0.12),
-            },
-            "diff": {
-                "add": blend(green_l, c["surface"]["light"], 0.15),
-                "change": blend(
-                    set_lightness(c["primary"]["light"], 40),
-                    c["surface"]["light"],
+                "bg_warn": blend(
+                    hsl_to_hex([hue_yellow, 65, 38]),
+                    hsl_to_hex([p_h, 8, 97]),
                     0.15,
                 ),
-                "delete": blend(red_l, c["surface"]["light"], 0.15),
-                "text": blend(
-                    set_lightness(c["primary"]["light"], 40),
-                    c["surface"]["light"],
-                    0.30,
+                "bg_info": blend(p_light_base, hsl_to_hex([p_h, 8, 97]), 0.15),
+                "bg_hint": blend(
+                    hsl_to_hex([hue_green, 50, 36]),
+                    hsl_to_hex([p_h, 8, 97]),
+                    0.15,
                 ),
+            },
+            "diff": {
+                "add": blend(
+                    hsl_to_hex([hue_green, 50, 36]),
+                    hsl_to_hex([p_h, 8, 97]),
+                    0.18,
+                ),
+                "change": blend(p_light_base, hsl_to_hex([p_h, 8, 97]), 0.18),
+                "delete": blend(
+                    hsl_to_hex([hue_red, 60, 42]), hsl_to_hex([p_h, 8, 97]), 0.18
+                ),
+                "text": blend(p_light_base, hsl_to_hex([p_h, 8, 97]), 0.35),
             },
         },
     }
@@ -339,31 +245,15 @@ def build_theme(primary_hex):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate a harmonized dark/light theme with strict semantic colors from a primary HEX color."
+        description="Generate json palette with dedicated primary fields."
     )
-
-    parser.add_argument(
-        "primary",
-        help="Primary color in HEX format, e.g. #ffb4a7",
-    )
-
-    parser.add_argument(
-        "output",
-        help="Output JSON file path, e.g. ./theme.json",
-    )
-
+    parser.add_argument("primary", help="Primary color in HEX format")
+    parser.add_argument("output", help="Output JSON path")
     args = parser.parse_args()
 
-    try:
-        hex_to_rgb(args.primary)
-        theme = build_theme(args.primary)
-
-        with open(args.output, "w", encoding="utf-8") as f:
-            json.dump(theme, f, indent=2, ensure_ascii=False)
-            f.write("\n")
-
-    except ValueError as e:
-        parser.error(str(e))
+    theme = build_theme(args.primary)
+    with open(args.output, "w", encoding="utf-8") as f:
+        json.dump(theme, f, indent=2, ensure_ascii=False)
 
 
 if __name__ == "__main__":
