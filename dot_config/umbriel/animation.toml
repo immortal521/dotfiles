@@ -55,3 +55,9 @@ dim = 0.2         # 0.0-1.0
 enabled = true
 duration_ms = 350
 curve = "easeout"
+
+[animation.beziers]
+myBezier = [0.05, 0.9, 0.1, 1.05]
+
+[animation.springs]
+myBounce = { damping = 0.5, stiffness = 200 }

@@ -20,7 +20,8 @@ blur = true
 [[window_rule]]
 match.app_id = "^dev\\.noctalia\\.Noctalia$"
 default_floating = true
-default_width = 1.0
+default_width = 0.8
+default_height = 0.9
 blur_optimized = false
 blur_popups = false
 
@@ -28,7 +29,8 @@ blur_popups = false
 match.app_id = "^dev\\.noctalia\\.UmbrielSharePicker$"
 default_floating = true
 blur_optimized = false
-default_size = [800, 600]
+default_width = 0.8
+default_height = 0.9
 
 # ============================================================
 # 模糊 / 透明 (Blur & opacity)
@@ -60,44 +62,51 @@ blur = false
 # ============================================================
 [[window_rule]]
 match.app_id = "^(gnome-control-center|pavucontrol|nm-connection-editor)$"
-default_width = 0.5
+default_width = 0.8
+default_height = 0.9
 default_floating = true
 blur_optimized = false
 
 [[window_rule]]
-match.app_id = "^(org\\.gnome\\.Calculator|gnome-calculator|galculator|blueman-manager|xdg-desktop-portal)$"
+match.app_id = "^(org\\.gnome\\.Calculator|gnome-calculator|galculator|blueman-manager|xdg-desktop-portal|xdg-desktop-portal-gtk)$"
 default_floating = true
 blur_optimized = false
+default_width = 0.8
+default_height = 0.9
 
 [[window_rule]]
 match.app_id = "^imv$"
 default_floating = true
 blur_optimized = false
+default_width = 0.8
+default_height = 0.9
+
+[[window_rule]]
+match.app_id = "nwg-look"
+match.title = "nwg-look"
+default_floating = true
+default_width = 0.8
+default_height = 0.9
 
 [[window_rule]]
 match.title = "^(Open File|Select|Choose a wallpaper|Open Folder|Save As|Library|Choose Where to Download|File Operation Progress|Rename|Copy Files|Move Files|Search Files)$"
 default_floating = true
 blur_optimized = false
+default_width = 0.8
+default_height = 0.9
 
 [[window_rule]]
-match.app_id = "^xdg-desktop-portal-gtk$"
-match.title = "^(File Upload|打开文件$|flutter picker$)"
+match.app_id = "^zen$"
+match.title = "^(扩展：|Extension:)"
 default_floating = true
-default_size = [1000, 750]
-blur_optimized = false
-
-# [[window_rule]]
-# match.app_id = "^zen$"
-# match.title = "^(扩展：|Extension:)"
-# default_floating = true
-# default_size = [400, 800]
 # default_position = { x = 0, y = 0 }
-#
-# [[window_rule]]
-# match.app_id = "org\\.localsend\\.localsend_app"
-# match.title = "LocalSend"
-# default_floating = true
-# default_size = [300, 800]
+
+[[window_rule]]
+match.app_id = "org\\.localsend\\.localsend_app"
+match.title = "LocalSend"
+default_floating = true
+default_height = 1
+default_width = 0.3
 
 
 # ============================================================
@@ -113,11 +122,15 @@ default_position = { x = 20, y = 20, anchor = "bottom_right" }
 [[window_rule]]
 match.app_id = "^(org\\.gnome\\.Loupe|org\\.gnome\\.Totem|org\\.gnome\\.Photos)$"
 default_floating = true
+default_width = 0.8
+default_height = 0.9
 opacity = 1.0
 
 [[window_rule]]
 match.title = "(图片查看器|Image Viewer|图片和视频|Image and Video Viewer|视频播放器|Video Player|Videos)"
 default_floating = true
+default_width = 0.8
+default_height = 0.9
 opacity = 1.0
 
 # ============================================================
@@ -128,15 +141,17 @@ match.app_id = "^wechat$"
 match.title = "^图片和视频$"
 default_floating = true
 opacity = 1.0
+default_width = 0.8
+default_height = 0.9
 default_maximize = false
-default_width = 0.75
 
 [[window_rule]]
 match.app_id = "^org\\.fcitx\\.fcitx5-config-qt$"
 match.title = "^Fcitx 配置$"
 default_floating = true
 default_maximize = false
-default_width = 0.75
+default_width = 0.8
+default_height = 0.9
 blur_optimized = false
 
 
@@ -154,6 +169,8 @@ blur_optimized = false
 match.app_id = "^QQ$"
 match.title = "^群聊的聊天记录$"
 default_floating = true
+default_width = 0.8
+default_height = 0.9
 blur_optimized = false
 
 [[window_rule]]
@@ -206,5 +223,5 @@ blur_optimized = false
 [[layer_rule]]
 match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
 blur = true
-blur_ignore_alpha = 0.5
+blur_ignore_alpha = 0.4
 blur_optimized = false
