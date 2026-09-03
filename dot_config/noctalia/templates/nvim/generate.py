@@ -3,9 +3,6 @@ import colorsys
 import json
 
 
-# --- HSL/RGB 基础转换 ---
-
-
 def hex_to_rgb(hex_str):
     hex_str = hex_str.lstrip("#")
     if len(hex_str) != 6:
@@ -30,7 +27,7 @@ def hsl_to_hex(hsl):
     return rgb_to_hex((r, g, b))
 
 
-# --- 链式颜色变换 ---
+# --- 颜色变换工具 ---
 
 
 def rotate_hue(hex_str, degree):
@@ -71,13 +68,18 @@ def blend(hex_str1, hex_str2, alpha):
     )
 
 
-# --- 调色板生成 ---
-
-
 def generate_harmonized_palette(primary_hex):
     h, s, l = hex_to_hsl(primary_hex)
 
-    base_s = max(55.0, min(s, 75.0))
+    # 提取基准饱和度，确保语义色不会过淡或过艳
+    base_s = max(60.0, min(s, 80.0))
+
+    # 锚定固定语义色相 (Hue)
+    # Red: ~5°, Yellow/Amber: ~40°, Green: ~135°, Cyan/Blue: ~200°
+    hue_red = 5
+    hue_yellow = 40
+    hue_green = 135
+    hue_cyan = 185
 
     return {
         "primary": {
@@ -104,9 +106,24 @@ def generate_harmonized_palette(primary_hex):
             "dark": hsl_to_hex([(h - 25) % 360, base_s - 5, 70]),
             "light": hsl_to_hex([(h - 25) % 360, base_s - 5, 45]),
         },
-        "error": {
-            "dark": "#E56B6B",
-            "light": "#C53030",
+        # 语义固定色定义
+        "semantic": {
+            "red": {
+                "dark": hsl_to_hex([hue_red, base_s, 65]),
+                "light": hsl_to_hex([hue_red, base_s + 10, 42]),
+            },
+            "yellow": {
+                "dark": hsl_to_hex([hue_yellow, base_s, 68]),
+                "light": hsl_to_hex([hue_yellow, base_s + 15, 38]),
+            },
+            "green": {
+                "dark": hsl_to_hex([hue_green, base_s - 10, 62]),
+                "light": hsl_to_hex([hue_green, base_s - 5, 36]),
+            },
+            "cyan": {
+                "dark": hsl_to_hex([hue_cyan, base_s - 5, 66]),
+                "light": hsl_to_hex([hue_cyan, base_s, 38]),
+            },
         },
         "surface": {
             "dark": hsl_to_hex([h, 8, 11]),
@@ -154,6 +171,14 @@ def generate_harmonized_palette(primary_hex):
 def build_theme(primary_hex):
     c = generate_harmonized_palette(primary_hex)
 
+    # 快捷别名提取语义色彩
+    sem = c["semantic"]
+
+    red_d, red_l = sem["red"]["dark"], sem["red"]["light"]
+    yellow_d, yellow_l = sem["yellow"]["dark"], sem["yellow"]["light"]
+    green_d, green_l = sem["green"]["dark"], sem["green"]["light"]
+    cyan_d, cyan_l = sem["cyan"]["dark"], sem["cyan"]["light"]
+
     return {
         "dark": {
             "bg": c["surface"]["dark"],
@@ -182,84 +207,52 @@ def build_theme(primary_hex):
                 "fg": c["on_surface"]["dark"],
                 "border": c["outline_variant"]["dark"],
             },
-            "statusline": {
-                "bg": c["surface_container_low"]["dark"],
-                "fg": c["on_surface_variant"]["dark"],
-                "active": c["on_surface"]["dark"],
-                "inactive": c["outline"]["dark"],
-            },
+            # Standard Colors
             "blue": c["primary"]["dark"],
-            "blue_dim": desaturate(
-                darken(c["primary"]["dark"], 15),
-                10,
-            ),
+            "blue_dim": desaturate(darken(c["primary"]["dark"], 15), 10),
             "blue_bright": c["primary_fixed"]["dark"],
-            "cyan": c["tertiary"]["dark"],
-            "green": c["secondary"]["dark"],
-            "green_bright": c["secondary_fixed"]["dark"],
-            "yellow": lighten(
-                rotate_hue(c["tertiary"]["dark"], -20),
-                8,
-            ),
-            "orange": rotate_hue(c["error"]["dark"], 20),
-            "red": c["error"]["dark"],
-            "red_dim": darken(c["error"]["dark"], 15),
-            "purple": rotate_hue(c["primary"]["dark"], 20),
-            "pink": rotate_hue(c["tertiary"]["dark"], 15),
+            "cyan": cyan_d,
+            "green": green_d,
+            "green_bright": lighten(green_d, 10),
+            "yellow": yellow_d,
+            "orange": rotate_hue(red_d, 25),
+            "red": red_d,
+            "red_dim": darken(red_d, 15),
+            "purple": rotate_hue(c["primary"]["dark"], 25),
+            "pink": rotate_hue(red_d, 330),
             "comment": c["outline"]["dark"],
             "terminal_black": c["surface_container_highest"]["dark"],
+            # Extended Palette (Catppuccin Style)
+            "rosewater": rotate_hue(red_d, 15),
+            "flamingo": rotate_hue(red_d, 25),
+            "mauve": rotate_hue(c["primary"]["dark"], 30),
+            "maroon": darken(red_d, 10),
+            "peach": rotate_hue(yellow_d, -15),
+            "teal": rotate_hue(green_d, 30),
+            "sky": rotate_hue(cyan_d, 15),
+            "sapphire": rotate_hue(c["primary"]["dark"], -10),
+            "lavender": rotate_hue(c["primary"]["dark"], 15),
             "git": {
-                "add": c["secondary"]["dark"],
+                "add": green_d,
                 "change": c["primary"]["dark"],
-                "delete": c["error"]["dark"],
+                "delete": red_d,
             },
+            # 强化强固定的 Diagnostcs (Error=红, Warn=黄, Info=蓝/主色, Hint=绿)
             "diag": {
-                "error": c["error"]["dark"],
-                "warn": rotate_hue(c["tertiary"]["dark"], -20),
+                "error": red_d,
+                "warn": yellow_d,
                 "info": c["primary"]["dark"],
-                "hint": c["secondary"]["dark"],
-                "bg_error": blend(
-                    c["error"]["dark"],
-                    c["surface"]["dark"],
-                    0.15,
-                ),
-                "bg_warn": blend(
-                    rotate_hue(c["tertiary"]["dark"], -20),
-                    c["surface"]["dark"],
-                    0.15,
-                ),
-                "bg_info": blend(
-                    c["primary"]["dark"],
-                    c["surface"]["dark"],
-                    0.15,
-                ),
-                "bg_hint": blend(
-                    c["secondary"]["dark"],
-                    c["surface"]["dark"],
-                    0.15,
-                ),
+                "hint": green_d,
+                "bg_error": blend(red_d, c["surface"]["dark"], 0.15),
+                "bg_warn": blend(yellow_d, c["surface"]["dark"], 0.15),
+                "bg_info": blend(c["primary"]["dark"], c["surface"]["dark"], 0.15),
+                "bg_hint": blend(green_d, c["surface"]["dark"], 0.15),
             },
             "diff": {
-                "add": blend(
-                    c["secondary"]["dark"],
-                    c["surface"]["dark"],
-                    0.20,
-                ),
-                "change": blend(
-                    c["primary"]["dark"],
-                    c["surface"]["dark"],
-                    0.20,
-                ),
-                "delete": blend(
-                    c["error"]["dark"],
-                    c["surface"]["dark"],
-                    0.20,
-                ),
-                "text": blend(
-                    c["primary"]["dark"],
-                    c["surface"]["dark"],
-                    0.40,
-                ),
+                "add": blend(green_d, c["surface"]["dark"], 0.20),
+                "change": blend(c["primary"]["dark"], c["surface"]["dark"], 0.20),
+                "delete": blend(red_d, c["surface"]["dark"], 0.20),
+                "text": blend(c["primary"]["dark"], c["surface"]["dark"], 0.40),
             },
         },
         "light": {
@@ -281,91 +274,59 @@ def build_theme(primary_hex):
                 "fg": c["on_surface"]["light"],
                 "border": c["outline_variant"]["light"],
             },
-            "statusline": {
-                "bg": c["surface_container_low"]["light"],
-                "fg": c["on_surface_variant"]["light"],
-                "active": c["on_surface"]["light"],
-                "inactive": c["outline"]["light"],
-            },
+            # Standard Colors
             "blue": set_lightness(c["primary"]["light"], 40),
             "blue_dim": set_lightness(c["primary"]["light"], 30),
             "blue_bright": set_lightness(c["primary"]["light"], 48),
-            "cyan": set_lightness(c["tertiary"]["light"], 38),
-            "green": set_lightness(c["secondary"]["light"], 36),
-            "green_bright": set_lightness(c["secondary"]["light"], 30),
-            "yellow": set_lightness(
-                rotate_hue(c["tertiary"]["light"], -20),
-                40,
-            ),
-            "orange": set_lightness(
-                rotate_hue(c["error"]["light"], 20),
-                38,
-            ),
-            "red": set_lightness(c["error"]["light"], 42),
-            "red_dim": set_lightness(c["error"]["light"], 32),
-            "purple": set_lightness(
-                rotate_hue(c["primary"]["light"], 20),
-                40,
-            ),
-            "pink": set_lightness(
-                rotate_hue(c["tertiary"]["light"], 15),
-                42,
-            ),
+            "cyan": cyan_l,
+            "green": green_l,
+            "green_bright": set_lightness(green_l, 30),
+            "yellow": yellow_l,
+            "orange": rotate_hue(red_l, 25),
+            "red": red_l,
+            "red_dim": set_lightness(red_l, 32),
+            "purple": set_lightness(rotate_hue(c["primary"]["light"], 25), 40),
+            "pink": set_lightness(rotate_hue(red_l, 330), 42),
             "comment": c["outline"]["light"],
             "terminal_black": c["outline_variant"]["light"],
+            # Extended Palette (Catppuccin Style)
+            "rosewater": rotate_hue(red_l, 15),
+            "flamingo": rotate_hue(red_l, 25),
+            "mauve": set_lightness(rotate_hue(c["primary"]["light"], 30), 40),
+            "maroon": set_lightness(red_l, 35),
+            "peach": rotate_hue(yellow_l, -15),
+            "teal": rotate_hue(green_l, 30),
+            "sky": rotate_hue(cyan_l, 15),
+            "sapphire": set_lightness(rotate_hue(c["primary"]["light"], -10), 38),
+            "lavender": set_lightness(rotate_hue(c["primary"]["light"], 15), 42),
             "git": {
-                "add": set_lightness(c["secondary"]["light"], 36),
+                "add": green_l,
                 "change": set_lightness(c["primary"]["light"], 40),
-                "delete": set_lightness(c["error"]["light"], 42),
+                "delete": red_l,
             },
+            # 强化强固定的 Diagnostcs (Error=红, Warn=黄, Info=蓝色/主色, Hint=绿)
             "diag": {
-                "error": set_lightness(c["error"]["light"], 42),
-                "warn": set_lightness(
-                    rotate_hue(c["tertiary"]["light"], -20),
-                    40,
-                ),
+                "error": red_l,
+                "warn": yellow_l,
                 "info": set_lightness(c["primary"]["light"], 38),
-                "hint": set_lightness(c["secondary"]["light"], 36),
-                "bg_error": blend(
-                    set_lightness(c["error"]["light"], 42),
-                    c["surface"]["light"],
-                    0.12,
-                ),
-                "bg_warn": blend(
-                    set_lightness(
-                        rotate_hue(c["tertiary"]["light"], -20),
-                        40,
-                    ),
-                    c["surface"]["light"],
-                    0.12,
-                ),
+                "hint": green_l,
+                "bg_error": blend(red_l, c["surface"]["light"], 0.12),
+                "bg_warn": blend(yellow_l, c["surface"]["light"], 0.12),
                 "bg_info": blend(
                     set_lightness(c["primary"]["light"], 38),
                     c["surface"]["light"],
                     0.12,
                 ),
-                "bg_hint": blend(
-                    set_lightness(c["secondary"]["light"], 36),
-                    c["surface"]["light"],
-                    0.12,
-                ),
+                "bg_hint": blend(green_l, c["surface"]["light"], 0.12),
             },
             "diff": {
-                "add": blend(
-                    set_lightness(c["secondary"]["light"], 36),
-                    c["surface"]["light"],
-                    0.15,
-                ),
+                "add": blend(green_l, c["surface"]["light"], 0.15),
                 "change": blend(
                     set_lightness(c["primary"]["light"], 40),
                     c["surface"]["light"],
                     0.15,
                 ),
-                "delete": blend(
-                    set_lightness(c["error"]["light"], 42),
-                    c["surface"]["light"],
-                    0.15,
-                ),
+                "delete": blend(red_l, c["surface"]["light"], 0.15),
                 "text": blend(
                     set_lightness(c["primary"]["light"], 40),
                     c["surface"]["light"],
@@ -378,7 +339,7 @@ def build_theme(primary_hex):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate a harmonized dark/light theme from a primary HEX color."
+        description="Generate a harmonized dark/light theme with strict semantic colors from a primary HEX color."
     )
 
     parser.add_argument(
@@ -394,9 +355,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        # 提前验证颜色
         hex_to_rgb(args.primary)
-
         theme = build_theme(args.primary)
 
         with open(args.output, "w", encoding="utf-8") as f:
