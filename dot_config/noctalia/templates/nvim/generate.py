@@ -62,7 +62,12 @@ def build_theme(primary_hex, mode="dark"):
 
     p_base = primary_hex
     p_dim = hsl_to_hex([p_h, p_s, p_l - (12 if is_dark else -10)])
-    p_bright = hsl_to_hex([p_h, min(100.0, p_s + 15), p_l + (12 if is_dark else -10)])
+
+    # primary_bright：保持强鲜艳度而非单纯发白
+    if is_dark:
+        p_bright = hsl_to_hex([p_h, max(p_s, 90.0), min(76.0, max(68.0, p_l + 10))])
+    else:
+        p_bright = hsl_to_hex([p_h, max(p_s, 85.0), max(30.0, min(38.0, p_l - 12))])
 
     hue_analogous_1 = build_dynamic_hue(p_h, -30)
     hue_analogous_2 = build_dynamic_hue(p_h, 30)
@@ -85,7 +90,6 @@ def build_theme(primary_hex, mode="dark"):
         bg_dim = hsl_to_hex([p_h, base_s, 17])
         bg_deep = hsl_to_hex([p_h, base_s, 10])
         bg_highlight = hsl_to_hex([p_h, base_s, 22])
-        bg_search = hsl_to_hex([p_h, max(p_s, 45.0), 26])
 
         fg = hsl_to_hex([p_h, 10, 94])
         fg_muted = hsl_to_hex([p_h, 10, 72])
@@ -117,7 +121,6 @@ def build_theme(primary_hex, mode="dark"):
         bg_dim = hsl_to_hex([p_h, base_s, 91])
         bg_deep = hsl_to_hex([p_h, base_s, 85])
         bg_highlight = hsl_to_hex([p_h, base_s, 94])
-        bg_search = hsl_to_hex([p_h, max(p_s, 35.0), 88])
 
         fg = hsl_to_hex([p_h, 20, 12])
         fg_muted = hsl_to_hex([p_h, 15, 38])
@@ -145,12 +148,12 @@ def build_theme(primary_hex, mode="dark"):
         lavender = hsl_to_hex([hue_triadic_2, 70, 44])
 
     cursor_line = blend(p_base, bg, 0.18 if is_dark else 0.10)
-    
-    # ---------- 选区颜色优化 ----------
-    # 暗色模式下：基色明度由 65.0 提升至 72.0，混合比例 alpha 由 0.38 降低至 0.22
-    # 这样生成的选区背景既有主色的柔和色彩感，又更通明亮丽，不显得过于浑浊/深沉。
+
     p_selection_base = hsl_to_hex([p_h, max(p_s, 70.0), 72.0 if is_dark else 45.0])
     selection = blend(p_selection_base, bg, 0.22 if is_dark else 0.25)
+
+    p_search_base = hsl_to_hex([p_h, max(p_s, 85.0), 75.0 if is_dark else 50.0])
+    bg_search = blend(p_search_base, bg, 0.38 if is_dark else 0.30)
 
     return {
         "primary": p_base,
