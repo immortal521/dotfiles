@@ -66,11 +66,10 @@ def build_theme(primary_hex, mode="dark"):
         yellow = hsl_to_hex([hue_yellow, 60, 70])
         green = hsl_to_hex([hue_green, 50, 65])
 
-        # 关联主色的 cursor_line 与 selection
-        # cursor_line: 在背景色基础上融入约 8% 的主色高亮
-        cursor_line = blend(p_base, bg, 0.08)
-        # selection: 融入约 25% 的主色，提供协调且清晰的选中效果
-        selection = blend(p_base, bg, 0.25)
+        cursor_line = blend(p_base, bg, 0.20)
+
+        p_selection_base = hsl_to_hex([p_h, max(p_s, 70.0), max(p_l, 68.0)])
+        selection = blend(p_selection_base, bg, 0.38)
 
         return {
             "primary": p_base,
@@ -149,10 +148,8 @@ def build_theme(primary_hex, mode="dark"):
         yellow = hsl_to_hex([hue_yellow, 65, 38])
         green = hsl_to_hex([hue_green, 50, 36])
 
-        # 亮色模式下同样融入主色
-        # cursor_line: 极轻微的主色着色（约 5% 透明度）
-        cursor_line = blend(p_base, bg, 0.05)
-        # selection: 柔和的浅主色选中区（约 18% 透明度）
+        cursor_line = blend(p_base, bg, 0.12)
+
         p_selection_base = hsl_to_hex([p_h, max(p_s, 65.0), min(p_l, 50.0)])
         selection = blend(p_selection_base, bg, 0.32)
 
