@@ -3,16 +3,13 @@ import colorsys
 import json
 
 
-# --- 颜色转换基础函数 ---
-
-
 def hex_to_rgb(hex_str):
     hex_str = hex_str.lstrip("#")
     return tuple(int(hex_str[i : i + 2], 16) / 255.0 for i in (0, 2, 4))
 
 
 def rgb_to_hex(rgb):
-    r, g, b = [max(0, min(255, int(round(x * 255)))) for x in rgb]
+    r, g, b = [max(0, min(255, round(x * 255))) for x in rgb]
     return f"#{r:02x}{g:02x}{b:02x}"
 
 
@@ -40,24 +37,17 @@ def blend(hex_str1, hex_str2, alpha):
     )
 
 
-# --- 核心：解耦基调色与标准颜色 ---
+def adjust_lightness(p_h, p_s, target_l):
+    """根据主色的色相/饱和度调整亮度"""
+    return hsl_to_hex([p_h, p_s, max(0.0, min(100.0, target_l))])
 
 
-def build_theme(primary_hex):
+def build_theme(primary_hex, mode="dark"):
     p_h, p_s, p_l = hex_to_hsl(primary_hex)
 
-    # 1. 提取基调色（Primary / Accent）及其变体
-    # 暗色模式下的主色变体
-    p_dark_base = hsl_to_hex([p_h, max(50.0, p_s), 75])
-    p_dark_dim = hsl_to_hex([p_h, max(40.0, p_s * 0.8), 58])
-    p_dark_bright = hsl_to_hex([p_h, max(60.0, p_s), 85])
+    # 保持主色与输入的源主色一致
+    p_base = primary_hex
 
-    # 亮色模式下的主色变体
-    p_light_base = hsl_to_hex([p_h, max(50.0, p_s), 45])
-    p_light_dim = hsl_to_hex([p_h, max(40.0, p_s * 0.8), 35])
-    p_light_bright = hsl_to_hex([p_h, max(60.0, p_s), 55])
-
-    # 2. 独立的标准语义色彩（标准 Hue，不受 primary 拖累）
     hue_blue = 210
     hue_cyan = 185
     hue_green = 135
@@ -67,14 +57,26 @@ def build_theme(primary_hex):
     hue_purple = 270
     hue_pink = 330
 
-    return {
-        "dark": {
-            # ===== 新增：专门围绕基调色的字段 =====
-            "primary": p_dark_base,
-            "primary_dim": p_dark_dim,
-            "primary_bright": p_dark_bright,
-            # ===== 背景与基础 UI =====
-            "bg": hsl_to_hex([p_h, 10, 11]),  # 微微带有基调色调的深暗背景
+    if mode == "dark":
+        p_dim = adjust_lightness(p_h, p_s, p_l - 12)
+        p_bright = adjust_lightness(p_h, p_s, p_l + 12)
+
+        bg = hsl_to_hex([p_h, 10, 11])
+        red = hsl_to_hex([hue_red, 65, 68])
+        yellow = hsl_to_hex([hue_yellow, 60, 70])
+        green = hsl_to_hex([hue_green, 50, 65])
+
+        # 关联主色的 cursor_line 与 selection
+        # cursor_line: 在背景色基础上融入约 8% 的主色高亮
+        cursor_line = blend(p_base, bg, 0.08)
+        # selection: 融入约 25% 的主色，提供协调且清晰的选中效果
+        selection = blend(p_base, bg, 0.25)
+
+        return {
+            "primary": p_base,
+            "primary_dim": p_dim,
+            "primary_bright": p_bright,
+            "bg": bg,
             "bg_dim": hsl_to_hex([p_h, 10, 13]),
             "bg_deep": hsl_to_hex([p_h, 10, 8]),
             "bg_highlight": hsl_to_hex([p_h, 10, 19]),
@@ -84,24 +86,23 @@ def build_theme(primary_hex):
             "fg_gutter": hsl_to_hex([p_h, 5, 30]),
             "fg_dark": hsl_to_hex([p_h, 5, 48]),
             "border": hsl_to_hex([p_h, 8, 20]),
-            "border_highlight": p_dark_base,
-            "selection": hsl_to_hex([p_h, 10, 23]),
-            "cursor_line": hsl_to_hex([p_h, 10, 16]),
+            "border_highlight": p_base,
+            "selection": selection,
+            "cursor_line": cursor_line,
             "float": {
                 "bg": hsl_to_hex([p_h, 10, 13]),
                 "fg": hsl_to_hex([p_h, 5, 90]),
                 "border": hsl_to_hex([p_h, 5, 30]),
             },
-            # ===== 真正标准的颜色（blue 回归蓝色） =====
             "blue": hsl_to_hex([hue_blue, 65, 75]),
             "blue_dim": hsl_to_hex([hue_blue, 50, 60]),
             "blue_bright": hsl_to_hex([hue_blue, 80, 85]),
             "cyan": hsl_to_hex([hue_cyan, 55, 68]),
-            "green": hsl_to_hex([hue_green, 50, 65]),
+            "green": green,
             "green_bright": hsl_to_hex([hue_green, 60, 75]),
-            "yellow": hsl_to_hex([hue_yellow, 60, 70]),
+            "yellow": yellow,
             "orange": hsl_to_hex([hue_orange, 60, 70]),
-            "red": hsl_to_hex([hue_red, 65, 68]),
+            "red": red,
             "red_dim": hsl_to_hex([hue_red, 60, 50]),
             "purple": hsl_to_hex([hue_purple, 50, 72]),
             "pink": hsl_to_hex([hue_pink, 55, 72]),
@@ -117,50 +118,49 @@ def build_theme(primary_hex):
             "sapphire": hsl_to_hex([200, 45, 68]),
             "lavender": hsl_to_hex([230, 45, 75]),
             "git": {
-                "add": hsl_to_hex([hue_green, 50, 65]),
-                "change": p_dark_base,  # Git 修改使用基调色
-                "delete": hsl_to_hex([hue_red, 65, 68]),
+                "add": green,
+                "change": p_base,
+                "delete": red,
             },
             "diag": {
-                "error": hsl_to_hex([hue_red, 65, 68]),
-                "warn": hsl_to_hex([hue_yellow, 60, 70]),
-                "info": p_dark_base,  # 诊断 Info 使用基调色
-                "hint": hsl_to_hex([hue_green, 50, 65]),
-                "bg_error": blend(
-                    hsl_to_hex([hue_red, 65, 68]), hsl_to_hex([p_h, 10, 11]), 0.2
-                ),
-                "bg_warn": blend(
-                    hsl_to_hex([hue_yellow, 60, 70]),
-                    hsl_to_hex([p_h, 10, 11]),
-                    0.2,
-                ),
-                "bg_info": blend(p_dark_base, hsl_to_hex([p_h, 10, 11]), 0.2),
-                "bg_hint": blend(
-                    hsl_to_hex([hue_green, 50, 65]),
-                    hsl_to_hex([p_h, 10, 11]),
-                    0.2,
-                ),
+                "error": red,
+                "warn": yellow,
+                "info": p_base,
+                "hint": green,
+                "bg_error": blend(red, bg, 0.2),
+                "bg_warn": blend(yellow, bg, 0.2),
+                "bg_info": blend(p_base, bg, 0.2),
+                "bg_hint": blend(green, bg, 0.2),
             },
             "diff": {
-                "add": blend(
-                    hsl_to_hex([hue_green, 50, 65]),
-                    hsl_to_hex([p_h, 10, 11]),
-                    0.25,
-                ),
-                "change": blend(p_dark_base, hsl_to_hex([p_h, 10, 11]), 0.25),
-                "delete": blend(
-                    hsl_to_hex([hue_red, 65, 68]), hsl_to_hex([p_h, 10, 11]), 0.25
-                ),
-                "text": blend(p_dark_base, hsl_to_hex([p_h, 10, 11]), 0.50),
+                "add": blend(green, bg, 0.25),
+                "change": blend(p_base, bg, 0.25),
+                "delete": blend(red, bg, 0.25),
+                "text": blend(p_base, bg, 0.50),
             },
-        },
-        "light": {
-            # ===== 亮色模式基调色 =====
-            "primary": p_light_base,
-            "primary_dim": p_light_dim,
-            "primary_bright": p_light_bright,
-            # ===== 背景与基础 UI =====
-            "bg": hsl_to_hex([p_h, 8, 97]),
+        }
+
+    else:  # mode == "light"
+        p_dim = adjust_lightness(p_h, p_s, p_l - 10)
+        p_bright = adjust_lightness(p_h, p_s, p_l + 10)
+
+        bg = hsl_to_hex([p_h, 8, 97])
+        red = hsl_to_hex([hue_red, 60, 42])
+        yellow = hsl_to_hex([hue_yellow, 65, 38])
+        green = hsl_to_hex([hue_green, 50, 36])
+
+        # 亮色模式下同样融入主色
+        # cursor_line: 极轻微的主色着色（约 5% 透明度）
+        cursor_line = blend(p_base, bg, 0.05)
+        # selection: 柔和的浅主色选中区（约 18% 透明度）
+        p_selection_base = hsl_to_hex([p_h, max(p_s, 65.0), min(p_l, 50.0)])
+        selection = blend(p_selection_base, bg, 0.32)
+
+        return {
+            "primary": p_base,
+            "primary_dim": p_dim,
+            "primary_bright": p_bright,
+            "bg": bg,
             "bg_dim": hsl_to_hex([p_h, 8, 88]),
             "bg_deep": hsl_to_hex([p_h, 8, 83]),
             "bg_highlight": hsl_to_hex([p_h, 8, 94]),
@@ -170,24 +170,23 @@ def build_theme(primary_hex):
             "fg_gutter": hsl_to_hex([p_h, 8, 52]),
             "fg_dark": hsl_to_hex([p_h, 8, 75]),
             "border": hsl_to_hex([p_h, 8, 75]),
-            "border_highlight": p_light_base,
-            "selection": hsl_to_hex([p_h, 8, 88]),
-            "cursor_line": hsl_to_hex([p_h, 8, 100]),
+            "border_highlight": p_base,
+            "selection": selection,
+            "cursor_line": cursor_line,
             "float": {
                 "bg": hsl_to_hex([p_h, 8, 94]),
                 "fg": hsl_to_hex([p_h, 10, 15]),
                 "border": hsl_to_hex([p_h, 8, 75]),
             },
-            # ===== 真正标准的颜色 =====
             "blue": hsl_to_hex([hue_blue, 50, 42]),
             "blue_dim": hsl_to_hex([hue_blue, 40, 32]),
             "blue_bright": hsl_to_hex([hue_blue, 65, 50]),
             "cyan": hsl_to_hex([hue_cyan, 50, 38]),
-            "green": hsl_to_hex([hue_green, 50, 36]),
+            "green": green,
             "green_bright": hsl_to_hex([hue_green, 60, 30]),
-            "yellow": hsl_to_hex([hue_yellow, 65, 38]),
+            "yellow": yellow,
             "orange": hsl_to_hex([hue_orange, 60, 42]),
-            "red": hsl_to_hex([hue_red, 60, 42]),
+            "red": red,
             "red_dim": hsl_to_hex([hue_red, 60, 32]),
             "purple": hsl_to_hex([hue_purple, 45, 42]),
             "pink": hsl_to_hex([hue_pink, 50, 44]),
@@ -203,57 +202,46 @@ def build_theme(primary_hex):
             "sapphire": hsl_to_hex([200, 45, 40]),
             "lavender": hsl_to_hex([230, 45, 44]),
             "git": {
-                "add": hsl_to_hex([hue_green, 50, 36]),
-                "change": p_light_base,
-                "delete": hsl_to_hex([hue_red, 60, 42]),
+                "add": green,
+                "change": p_base,
+                "delete": red,
             },
             "diag": {
-                "error": hsl_to_hex([hue_red, 60, 42]),
-                "warn": hsl_to_hex([hue_yellow, 65, 38]),
-                "info": p_light_base,
-                "hint": hsl_to_hex([hue_green, 50, 36]),
-                "bg_error": blend(
-                    hsl_to_hex([hue_red, 60, 42]), hsl_to_hex([p_h, 8, 97]), 0.15
-                ),
-                "bg_warn": blend(
-                    hsl_to_hex([hue_yellow, 65, 38]),
-                    hsl_to_hex([p_h, 8, 97]),
-                    0.15,
-                ),
-                "bg_info": blend(p_light_base, hsl_to_hex([p_h, 8, 97]), 0.15),
-                "bg_hint": blend(
-                    hsl_to_hex([hue_green, 50, 36]),
-                    hsl_to_hex([p_h, 8, 97]),
-                    0.15,
-                ),
+                "error": red,
+                "warn": yellow,
+                "info": p_base,
+                "hint": green,
+                "bg_error": blend(red, bg, 0.15),
+                "bg_warn": blend(yellow, bg, 0.15),
+                "bg_info": blend(p_base, bg, 0.15),
+                "bg_hint": blend(green, bg, 0.15),
             },
             "diff": {
-                "add": blend(
-                    hsl_to_hex([hue_green, 50, 36]),
-                    hsl_to_hex([p_h, 8, 97]),
-                    0.18,
-                ),
-                "change": blend(p_light_base, hsl_to_hex([p_h, 8, 97]), 0.18),
-                "delete": blend(
-                    hsl_to_hex([hue_red, 60, 42]), hsl_to_hex([p_h, 8, 97]), 0.18
-                ),
-                "text": blend(p_light_base, hsl_to_hex([p_h, 8, 97]), 0.35),
+                "add": blend(green, bg, 0.18),
+                "change": blend(p_base, bg, 0.18),
+                "delete": blend(red, bg, 0.18),
+                "text": blend(p_base, bg, 0.35),
             },
-        },
-    }
+        }
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate json palette with dedicated primary fields."
+        description="Generate single-mode JSON palette derived from a primary color."
     )
-    parser.add_argument("primary", help="Primary color in HEX format")
-    parser.add_argument("output", help="Output JSON path")
+    parser.add_argument("primary", help="Primary color in HEX format (e.g. #7aa2f7)")
+    parser.add_argument("output", help="Output JSON file path")
+    parser.add_argument(
+        "--mode",
+        choices=["dark", "light"],
+        default="dark",
+        help="Generate mode: 'dark' or 'light' (default: dark)",
+    )
     args = parser.parse_args()
 
-    theme = build_theme(args.primary)
+    palette = build_theme(args.primary, mode=args.mode)
     with open(args.output, "w", encoding="utf-8") as f:
-        json.dump(theme, f, indent=2, ensure_ascii=False)
+        json.dump(palette, f, indent=2, ensure_ascii=False)
 
 
 if __name__ == "__main__":

@@ -8,7 +8,8 @@ TARGET_DIR="$CONFIG_DIR/nvim"
 TARGET_NAME="palette.json"
 
 COLOR="$(head -n 1 "$SCRIPT_DIR/color-final")"
+THEME_MODE="$(noctalia msg theme-mode-get)"
 
-python3 "$SCRIPT_DIR/generate.py" "$COLOR" "$TARGET_DIR/$TARGET_NAME"
+python3 "$SCRIPT_DIR/generate.py" "$COLOR" "$TARGET_DIR/$TARGET_NAME" --mode "$THEME_MODE"
 
 pkill -SIGUSR1 nvim >/dev/null 2>&1 || true

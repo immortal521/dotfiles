@@ -21,4 +21,4 @@ post_hook = "if pgrep -x fcitx5 >/dev/null 2>&1; then pkill -x fcitx5; sleep 1; 
 [theme.templates.user.nvim]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim/color"
 output_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim/color-final"
-post_hook = "bash $XDG_CONFIG_HOME/noctalia/templates/nvim/apply.sh"
+post_hook = "bash \"$HOME/.config/noctalia/templates/nvim/apply.sh\""
