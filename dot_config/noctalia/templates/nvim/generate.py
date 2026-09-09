@@ -127,7 +127,7 @@ def build_theme(primary_hex, mode="dark"):
         fg_gutter = hsl_to_hex([p_h, 10, 58])
         fg_dark = hsl_to_hex([p_h, 10, 72])
 
-        border = hsl_to_hex([p_h, base_s, 76])
+        border = hsl_to_hex([p_h, base_s, 56])
 
         red = hsl_to_hex([red_h, 85, 42])
         yellow = hsl_to_hex([yellow_h, 100, 30])
@@ -147,7 +147,7 @@ def build_theme(primary_hex, mode="dark"):
         sapphire = hsl_to_hex([hue_complementary, 85, 36])
         lavender = hsl_to_hex([hue_triadic_2, 70, 44])
 
-    cursor_line = blend(p_base, bg, 0.18 if is_dark else 0.10)
+    cursor_line = blend(p_bright, bg, 0.05 if is_dark else 0.08)
 
     p_selection_base = hsl_to_hex([p_h, max(p_s, 70.0), 72.0 if is_dark else 45.0])
     selection = blend(p_selection_base, bg, 0.22 if is_dark else 0.25)
