@@ -41,6 +41,8 @@
 "Mod+L" = "window-focus-or-output-right"
 
 "Alt+Tab" = "window-focus-next"
+"Alt+Shift+Tab" = "window-focus-previous"
+"Mod+Backspace" = "window-focus-last"
 
 # ===== 窗口移动 =====
 "Mod+Ctrl+Left" = "column-move-left"
@@ -52,6 +54,17 @@
 "Mod+Ctrl+J" = "window-move-or-workspace-down"
 "Mod+Ctrl+K" = "window-move-or-workspace-up"
 "Mod+Ctrl+L" = "column-move-right"
+
+# ===== 窗口交换 =====
+"Mod+Alt+Left" = "window-swap-previous"
+"Mod+Alt+Right" = "window-swap-next"
+
+"Mod+Alt+H" = "window-swap-previous"
+"Mod+Alt+L" = "window-swap-next"
+
+# ===== Column 首尾移动 =====
+"Mod+Alt+Home" = "column-move-to-first"
+"Mod+Alt+End" = "column-move-to-last"
 
 # ===== 显示器焦点 =====
 "Mod+Shift+Left" = "output-focus-left"
@@ -91,6 +104,10 @@
 "Mod+8" = "workspace-switch:8"
 "Mod+9" = "workspace-switch:9"
 
+# ===== 工作区排序 =====
+"Mod+Alt+Page_Down" = "workspace-move-down"
+"Mod+Alt+Page_Up" = "workspace-move-up"
+
 # ===== 把窗口移到其他工作区 =====
 "Mod+Ctrl+Page_Down" = "window-move-to-workspace-next"
 "Mod+Ctrl+Page_Up" = "window-move-to-workspace-previous"
@@ -128,11 +145,21 @@
 "Mod+Alt+R" = "window-cycle-width-back"
 "Mod+Shift+R" = "window-cycle-height"
 "Mod+Shift+Alt+R" = "window-cycle-height-back"
+
 "Mod+Minus" = "window-modify-width:-0.1"
 "Mod+Equal" = "window-modify-width:0.1"
 "Mod+Shift+Minus" = "window-modify-height:-0.1"
 "Mod+Shift+Equal" = "window-modify-height:0.1"
+
 "Mod+C" = "window-center"
+"Mod+Alt+C" = "column-center"
+
+# ===== 布局模式 =====
+"Mod+Shift+T" = "workspace-set-layout:toggle"
+
+# ===== Master 布局 =====
+"Mod+Shift+Page_Down" = "layout-master-count-increase"
+"Mod+Shift+Page_Up" = "layout-master-count-decrease"
 
 # ===== 浮动 / 固定 / 最大化 =====
 "Mod+F" = "window-toggle-floating"
@@ -147,6 +174,7 @@
 "Ctrl+Print" = "spawn:grim"
 "Alt+Print" = "spawn:grim -g \"$(slurp)\""
 
+# ===== 工作区移动到其他显示器 =====
 "Mod+Shift+Ctrl+Alt+Left" = "workspace-move-to-output-left"
 "Mod+Shift+Ctrl+Alt+Down" = "workspace-move-to-output-down"
 "Mod+Shift+Ctrl+Alt+Up" = "workspace-move-to-output-up"
@@ -157,7 +185,6 @@
 "Mod+Shift+Ctrl+Alt+K" = "workspace-move-to-output-up"
 "Mod+Shift+Ctrl+Alt+L" = "workspace-move-to-output-right"
 
-# ===== 多媒体 / 亮度 =====
 # ===== 多媒体 / 亮度 =====
 "XF86AudioRaiseVolume" = { action = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+", allow_when_locked = true }
 "XF86AudioLowerVolume" = { action = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-", allow_when_locked = true }
@@ -184,13 +211,3 @@
 
 # --- 键盘布局切换 ---
 # "Mod+Shift+K" = "keyboard-layout-next"
-
-# --- 其他示例 ---
-# "Mod+Comma" = "workspace-previous"
-# "Mod+Period" = "workspace-next"
-# "Mod+Shift+Comma" = "window-move-to-workspace-previous"
-# "Mod+Shift+Period" = "window-move-to-workspace-next"
-# "Mod+Ctrl+H" = "output-focus-left"
-# "Mod+Minus" = "window-modify-width:-0.1"
-# "Mod+C" = "window-center"
-# "Mod+Shift+T" = "workspace-set-layout:toggle"
