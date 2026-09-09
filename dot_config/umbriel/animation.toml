@@ -7,57 +7,52 @@ curve = "easeout"
 enabled = true
 duration_ms = 350
 curve = "easeout"
-style = "fade"    # "popin", "zoom", "slide", "fade", or "none"
+shader = "./shaders/radial-reveal.glsl"
 
 [animation.windows_out]
 enabled = true
 duration_ms = 350
 curve = "easeout"
-style = "fade"    # "fade" or "slide"
+shader = "./shaders/radial-reveal.glsl"
 
 [animation.windows_move]
 enabled = true
 duration_ms = 400
 curve = "snappy"
+shader = "./shaders/squash.glsl"
 
 [animation.workspaces]
 enabled = true
-duration_ms = 300
-curve = "easeout"
+duration_ms = 400
+curve = "0.15,1.2,0.25,1"
 
 [animation.overview]
 enabled = true
 duration_ms = 300
-curve = "easeout"
+curve = "0.2,1.08,0.3,1"
 
 [animation.scratchpad]
 enabled = true
 duration_ms = 350
-curve = "easeout"
-dim = 0.6          # 0.0-1.0
-blur = true        # requires appearance.blur.enabled
-scale = 0.8        # 0 preserves geometry; 0.1-1.0 sizes and centers on entry
-maximize = false   # maximize to edges on entry
-fullscreen = false # fullscreen on entry
+curve = "0.16,1,0.3,1"
+dim = 0.6
+blur = true
+scale = 0.8
+maximize = false
+fullscreen = false
 
 [animation.border]
 enabled = true
 duration_ms = 350
-curve = "easeout"
+curve = "0.2,0.8,0.3,1"
 
 [animation.dim_unfocused]
 enabled = true
 duration_ms = 350
-curve = "easeout"
-dim = 0.2         # 0.0-1.0
+curve = "0.2,0.8,0.3,1"
+dim = 0.2
 
 [animation.layers]
 enabled = true
-duration_ms = 350
-curve = "easeout"
-
-[animation.beziers]
-myBezier = [0.05, 0.9, 0.1, 1.05]
-
-[animation.springs]
-myBounce = { damping = 0.5, stiffness = 200 }
+duration_ms = 250
+curve = "0.16,1,0.3,1"

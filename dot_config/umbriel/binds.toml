@@ -2,7 +2,7 @@
 
 # ===== 应用启动 / 面板 =====
 "Mod+T" = "spawn:kitty"
-"Mod+E" = "spawn:nautilus"
+"Mod+E" = "spawn:thunar"
 "Mod+W" = "spawn:noctalia msg panel-toggle wallpaper"
 "Mod+Shift+W" = "spawn:noctalia msg panel-toggle tadomika_ari/w-engine:w-engine-panel"
 "Mod+Shift+C" = "spawn:noctalia msg panel-toggle yuuto/calculator:panel"
@@ -44,13 +44,13 @@
 
 # ===== 窗口移动 =====
 "Mod+Ctrl+Left" = "column-move-left"
-"Mod+Ctrl+Down" = "window-move-down"
-"Mod+Ctrl+Up" = "window-move-up"
+"Mod+Ctrl+Down" = "window-move-or-workspace-down"
+"Mod+Ctrl+Up" = "window-move-or-workspace-up"
 "Mod+Ctrl+Right" = "column-move-right"
 
 "Mod+Ctrl+H" = "column-move-left"
-"Mod+Ctrl+J" = "window-move-down"
-"Mod+Ctrl+K" = "window-move-up"
+"Mod+Ctrl+J" = "window-move-or-workspace-down"
+"Mod+Ctrl+K" = "window-move-or-workspace-up"
 "Mod+Ctrl+L" = "column-move-right"
 
 # ===== 显示器焦点 =====
@@ -108,17 +108,17 @@
 "Mod+Ctrl+9" = "window-move-to-workspace:9"
 
 # ===== 滚轮 =====
-"Mod+WheelDown" = "workspace-next"
-"Mod+WheelUp" = "workspace-previous"
+"Mod+WheelDown" = { action = "workspace-next", cooldown_ms = 150 }
+"Mod+WheelUp" = { action = "workspace-previous", cooldown_ms = 150 }
 
-"Mod+Ctrl+WheelDown" = "window-move-to-workspace-next"
-"Mod+Ctrl+WheelUp" = "window-move-to-workspace-previous"
+"Mod+Ctrl+WheelDown" = { action = "window-move-to-workspace-next", cooldown_ms = 150 }
+"Mod+Ctrl+WheelUp" = { action = "window-move-to-workspace-previous", cooldown_ms = 150 }
 
-"Mod+WheelLeft" = "window-focus-left"
-"Mod+WheelRight" = "window-focus-right"
+"Mod+WheelLeft" = { action = "window-focus-left", cooldown_ms = 150 }
+"Mod+WheelRight" = { action = "window-focus-right", cooldown_ms = 150 }
 
-"Mod+Ctrl+WheelLeft" = "column-move-left"
-"Mod+Ctrl+WheelRight" = "column-move-right"
+"Mod+Ctrl+WheelLeft" = { action = "column-move-left", cooldown_ms = 150 }
+"Mod+Ctrl+WheelRight" = { action = "column-move-right", cooldown_ms = 150 }
 
 # ===== 布局：吞噬 / 弹出 / 宽度 =====
 "Mod+BracketLeft" = "window-consume-or-expel-left"

@@ -6,4 +6,3 @@ width_presets = [0.333, 0.5, 0.667, 1] # shared by scrolling and dwindle
 [layout.scrolling]
 # default_width_fraction = 0.5
 center_underfull_strip = true # center the strip whenever it is narrower than the viewport
-expand_single_column = false

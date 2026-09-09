@@ -1,5 +1,6 @@
 [input]
-middle_click_paste = true # primary-selection clipboard, applies on reload
+middle_click_paste = true       # primary-selection clipboard, applies on reload
+window_drag_toggle = "floating"
 
 [input.keyboard]
 layout = ""           # "us,de" loads both; switch with keyboard-layout-next
