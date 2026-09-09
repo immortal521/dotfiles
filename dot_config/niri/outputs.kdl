@@ -11,3 +11,9 @@ output "HDMI-A-1" {
   scale 1.50
   transform "180"
 }
+
+output "DP-1" {
+  mode "2256x1504@60.000"
+  scale 1.50
+  transform "180"
+}

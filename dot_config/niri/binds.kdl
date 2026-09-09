@@ -1,3 +1,5 @@
+
+
 binds {
   // === 核心应用与系统组件 ===
   Mod+Shift+Slash { show-hotkey-overlay; }
