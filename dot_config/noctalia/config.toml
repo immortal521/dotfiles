@@ -1,0 +1,14 @@
+[include]
+autoload = false
+files = [
+  "bar.toml",
+  "widgets.toml",
+  "theme.toml",
+  "wallpaper.toml",
+  "services.toml",
+  "shell.toml",
+  "plugins.toml",
+  "dock.toml",
+  "hook.toml",
+  "templates.toml",
+]

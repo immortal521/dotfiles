@@ -1,0 +1,25 @@
+[backdrop]
+blur_intensity = 0.75
+enabled = true
+
+[wallpaper]
+directory = "/home/immortal/Pictures/Wallpapers"
+
+[wallpaper.automation]
+enabled = true
+interval_seconds = 600
+
+[wallpaper.default]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.last]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.monitors.eDP-1]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"
+
+[wallpaper.monitors.DP-1]
+path = "/home/immortal/Pictures/Wallpapers/1.jpg"

@@ -1,0 +1,25 @@
+[plugins]
+auto_update = "all"
+enabled = [
+  "dotnetrob/cat",
+  "yuuto/calculator",
+  "apex077/eyecare",
+  "radimous/prismlauncher-instances",
+]
+
+[[plugins.source]]
+kind = "git"
+location = "https://github.com/noctalia-dev/official-plugins"
+name = "official"
+
+[[plugins.source]]
+kind = "git"
+location = "https://github.com/noctalia-dev/community-plugins"
+name = "community"
+
+[plugin_settings."apex077/eyecare"]
+active_duration_minutes = 40
+break_duration_seconds = 60
+
+[plugin_settings."tadomika_ari/w-engine"]
+w-engine-panel_placement = "attached"

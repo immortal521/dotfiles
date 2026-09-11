@@ -1,0 +1,35 @@
+[theme]
+builtin = "Tokyo-Night"
+mode = "auto"
+shell_mode = "auto"
+source = "wallpaper"
+wallpaper_scheme = "m3-fruit-salad"
+
+[theme.templates]
+builtin_ids = [
+  "alacritty",
+  "btop",
+  "cava",
+  "gtk3",
+  "gtk4",
+  "ghostty",
+  "kcolorscheme",
+  "kitty",
+  "niri",
+  "qt",
+  "umbriel",
+]
+community_ids = [
+  "opencode",
+  "pi-agent",
+  "discord",
+  "inkscape",
+  "obsidian",
+  "prismlauncher",
+  "vicinae",
+  "fastfetch",
+  "obs",
+  "papirus-icons",
+  "bat",
+  "yazi",
+]

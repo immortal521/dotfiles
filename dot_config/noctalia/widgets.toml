@@ -1,0 +1,40 @@
+[widget.audio_visualizer]
+anchor = true
+bands = 64
+show_when_idle = true
+width = 100.0
+color_2 = "secondary"
+
+[widget.battery]
+hide_when_full = true
+hide_when_plugged = true
+show_label = false
+
+[widget.brightness]
+show_label = false
+
+[widget.control-center]
+glyph = "brand-amigo"
+
+[widget.date]
+format = "%m-%d %H:%M:%S"
+
+[widget.network]
+show_label = false
+
+[widget.tray]
+drawer = true
+drawer_columns = 5
+
+[widget.volume]
+show_label = false
+
+[widget.workspaces]
+label_source = "name"
+show_labels = false
+
+[widget.cat]
+type = "dotnetrob/cat:cat"
+
+[widget.media]
+hide_when_no_media = true

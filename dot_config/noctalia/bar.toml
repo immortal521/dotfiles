@@ -1,0 +1,30 @@
+[bar]
+order = ["default"]
+
+[bar.default]
+auto_hide = true
+background_opacity = 0.64
+border = "primary"
+border_width = 0.0
+center = ["audio_visualizer"]
+end = [
+  "cat",
+  "tray",
+  "notifications",
+  "battery",
+  "network",
+  "bluetooth",
+  "volume",
+  "brightness",
+  "date",
+  "control-center",
+]
+layer = "top"
+margin_edge = 4
+margin_ends = 4
+position = "top"
+smart_auto_hide = true
+radius = 20
+reserve_space = false
+start = ["workspaces", "media"]
+thickness = 40

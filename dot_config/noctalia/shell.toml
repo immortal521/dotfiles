@@ -1,0 +1,132 @@
+[osd]
+background_opacity = 0.51
+border = false
+offset_y = 20
+
+[shell]
+external_ip_enabled = true
+screen_time_enabled = true
+niri_overview_type_to_launch_enabled = true
+password_style = "random"
+polkit_agent = true
+settings_show_advanced = true
+settings_window_translucent = true
+
+[shell.greeter_sync]
+auto_sync = true
+
+[shell.launcher.providers.calculator]
+prefix = "cpt"
+
+[shell.panel]
+floating_layer = "top"
+clipboard_placement = "floating"
+launcher_placement = "floating"
+launcher_position = "bottom_center"
+list_item_background = true
+open_near_click_control_center = true
+open_near_click_launcher = true
+transparency_mode = "glass"
+
+[shell.screen_corners]
+enabled = true
+
+[shell.screenshot]
+directory = "/home/immortal/Pictures/Screenshots"
+pipe_command = "satty -f -"
+pipe_to_command = false
+annotate = true
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+
+[control_center.calendar]
+show_week_numbers = true
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+[desktop_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[desktop_widgets.widget]
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [
+  "lockscreen-login-box@DP-1",
+  "lockscreen-login-box@eDP-1",
+  "lockscreen-login-box@HDMI-A-1",
+]
+
+
+[lockscreen_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+box_height = 0.0
+box_width = 0.0
+cx = 752.0
+cy = 880.0
+output = "HDMI-A-1"
+rotation = 0.0
+type = "login_box"
+
+[lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+box_height = 196.0
+box_width = 810.0
+cx = 752.0
+cy = 820.0
+output = "DP-1"
+placement_height = 1002.0
+placement_width = 1504.0
+rotation = 0.0
+type = "login_box"
+
+[lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+background_color = "surface_variant"
+background_opacity = 0.88
+background_radius = 12.0
+center_password_text = false
+input_opacity = 1.0
+input_radius = 6.0
+layout = "regular"
+show_caps_lock = true
+show_keyboard_layout = true
+show_login_button = true
+show_media = true
+show_session_buttons = true
+show_unlock_hint = true
+show_weather = true
+
+[lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+background_color = "surface_variant"
+background_opacity = 0.88
+background_radius = 12.0
+input_opacity = 1.0
+input_radius = 6.0
+show_login_button = true
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+box_height = 0.0
+box_width = 0.0
+cx = 768.0
+cy = 741.0
+output = "eDP-1"
+rotation = 0.0
+type = "login_box"
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+background_color = "surface_variant"
+background_opacity = 0.88
+background_radius = 12.0
+input_opacity = 1.0
+input_radius = 6.0
+show_login_button = true

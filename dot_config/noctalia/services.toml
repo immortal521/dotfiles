@@ -1,0 +1,22 @@
+[audio]
+enable_overdrive = true
+sound_volume = 1.0
+
+[brightness]
+enable_ddcutil = true
+
+[location]
+auto_locate = true
+sunrise = "7:30"
+sunset = "18:00"
+
+[nightlight]
+temperature_day = 10000
+temperature_night = 9900
+
+[notification]
+background_opacity = 0.62
+layer = "top"
+monitors = []
+offset_y = 20
+position = "top_right"
