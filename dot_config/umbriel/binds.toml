@@ -40,6 +40,7 @@
 "Mod+K" = "window-focus-or-workspace-up"
 "Mod+L" = "window-focus-or-output-right"
 
+"Alt+Ctrl+Tab" = "spawn:noctalia msg window-switcher"
 "Alt+Tab" = "window-focus-next"
 "Alt+Shift+Tab" = "window-focus-previous"
 "Mod+Backspace" = "window-focus-last"
