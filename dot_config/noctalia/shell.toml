@@ -11,6 +11,7 @@ password_style = "random"
 polkit_agent = true
 settings_show_advanced = true
 settings_window_translucent = true
+umbriel_overview_type_to_launch_enabled = true
 
 [shell.greeter_sync]
 auto_sync = true
