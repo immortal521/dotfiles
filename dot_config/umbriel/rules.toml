@@ -104,9 +104,9 @@ default_floating = true
 [[window_rule]]
 match.app_id = "org\\.localsend\\.localsend_app"
 match.title = "LocalSend"
-default_floating = true
-default_height = 1
-default_width = 0.3
+default_floating = false
+# default_height = 1
+# default_width = 0.3333
 
 
 # ============================================================
