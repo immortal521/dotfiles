@@ -14,14 +14,14 @@ blur = true
 # match.is_focused = true
 # opacity = 1.0
 
+
 # ============================================================
 # Noctalia 桌面壳层 (Shell)
 # ============================================================
 [[window_rule]]
 match.app_id = "^dev\\.noctalia\\.Noctalia$"
 default_floating = true
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 blur_optimized = false
 blur_popups = false
 
@@ -29,8 +29,7 @@ blur_popups = false
 match.app_id = "^dev\\.noctalia\\.UmbrielSharePicker$"
 default_floating = true
 blur_optimized = false
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 
 # ============================================================
 # 模糊 / 透明 (Blur & opacity)
@@ -62,8 +61,7 @@ blur = false
 # ============================================================
 [[window_rule]]
 match.app_id = "^(gnome-control-center|pavucontrol|nm-connection-editor)$"
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 default_floating = true
 blur_optimized = false
 
@@ -71,29 +69,25 @@ blur_optimized = false
 match.app_id = "^(org\\.gnome\\.Calculator|gnome-calculator|galculator|blueman-manager|xdg-desktop-portal|xdg-desktop-portal-gtk)$"
 default_floating = true
 blur_optimized = false
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 
 [[window_rule]]
 match.app_id = "^imv$"
 default_floating = true
 blur_optimized = false
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 
 [[window_rule]]
 match.app_id = "nwg-look"
 match.title = "nwg-look"
 default_floating = true
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 
 [[window_rule]]
 match.title = "^(Open File|Select|Choose a wallpaper|Open Folder|Save As|Library|Choose Where to Download|File Operation Progress|Rename|Copy Files|Move Files|Search Files)$"
 default_floating = true
 blur_optimized = false
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 
 [[window_rule]]
 match.app_id = "^zen$"
@@ -116,21 +110,19 @@ default_floating = false
 match.title = "(画中画|Picture-in-Picture)"
 default_floating = true
 opacity = 1.0
-default_width = 0.1
+default_floating_size = { width = 1 }
 default_position = { x = 20, y = 20, anchor = "bottom_right" }
 
 [[window_rule]]
 match.app_id = "^(org\\.gnome\\.Loupe|org\\.gnome\\.Totem|org\\.gnome\\.Photos)$"
 default_floating = true
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 opacity = 1.0
 
 [[window_rule]]
 match.title = "(图片查看器|Image Viewer|图片和视频|Image and Video Viewer|视频播放器|Video Player|^Videos$)"
 default_floating = true
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 opacity = 1.0
 
 [[window_rule]]
@@ -146,8 +138,7 @@ match.app_id = "^wechat$"
 match.title = "^图片和视频$"
 default_floating = true
 opacity = 1.0
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 default_maximize = false
 
 [[window_rule]]
@@ -155,8 +146,7 @@ match.app_id = "^org\\.fcitx\\.fcitx5-config-qt$"
 match.title = "^Fcitx 配置$"
 default_floating = true
 default_maximize = false
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 blur_optimized = false
 
 
@@ -174,20 +164,31 @@ blur_optimized = false
 match.app_id = "^QQ$"
 match.title = "^群聊的聊天记录$"
 default_floating = true
-default_width = 0.8
-default_height = 0.9
+default_floating_size = { width = 0.8, height = 0.9 }
 blur_optimized = false
 
 [[window_rule]]
 match.app_id = "^qqmusic$"
 match.title = "^qqmusic$"
 default_maximize = false
-default_width = 0.66667
+default_scrolling_extent = 0.66667
+
+[[window_rule]]
+match.app_id = "^qqmusic$"
+match.title = "^qqmusic$"
+match.at_startup = true
+default_maximize = false
+default_scrolling_extent = 0.66667
+blur_optimized = false
+default_output = "ASEM S.p.A. 135TYPE-C demoset-1"
+default_workspace = 1
+default_scrolling_column = "qqmusic"
+default_scrolling_column_order = 3
 
 [[window_rule]]
 match.app_id = "^io\\.ente\\.auth$"
 default_floating = true
-default_size = [532, 925]
+default_floating_size_px = { width = 532, height = 925 }
 blur_optimized = false
 
 # ============================================================
@@ -203,7 +204,7 @@ blur_optimized = false
 [[window_rule]]
 match.app_id = "^steam$"
 match.title = "^(Friends List|好友列表)$"
-default_width = 0.20
+default_scrolling_extent = 0.20
 
 # ============================================================
 # 杂项应用 (Misc)
@@ -213,13 +214,26 @@ match.app_id = "^com\\.follow\\.clash$"
 match.title = "^FlClash$"
 default_maximize = false
 opacity = 0.8
-default_width = 0.33333
+default_scrolling_extent = 0.33333
 blur_optimized = false
+
+[[window_rule]]
+match.app_id = "^com\\.follow\\.clash$"
+match.title = "^FlClash$"
+match.at_startup = true
+default_maximize = false
+opacity = 0.8
+default_scrolling_extent = 0.33333
+blur_optimized = false
+default_output = "ASEM S.p.A. 135TYPE-C demoset-1"
+default_workspace = 1
+default_scrolling_column = "flclash"
+default_scrolling_column_order = 1
 
 [[window_rule]]
 match.app_id = "^dev\\.lemmy\\.swash$"
 default_floating = true
-default_size = [1000, 900]
+default_floating_size_px = { width = 1000, height = 900 }
 blur_optimized = false
 
 # ============================================================

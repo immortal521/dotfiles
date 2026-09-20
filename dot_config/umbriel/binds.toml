@@ -9,7 +9,7 @@
 "Mod+S" = "spawn:noctalia msg settings-toggle"
 "Mod+D" = "spawn:noctalia msg panel-toggle launcher"
 "Mod+Grave" = { action = "spawn:vicinae toggle", repeat = false }
-"Mod+V" = { action = "spawn:cliphist list | vicinae dmenu | cliphist decode | wl-copy", repeat = false }
+"Mod+V" = { action = "spawn:cliphist list | noctalia dmenu -p 剪贴板 | cliphist decode | wl-copy", repeat = false }
 "Mod+P" = { action = "spawn:vicinae vicinae://launch/clipboard/history", repeat = false }
 
 # ===== 工具 / 终端 =====
@@ -142,15 +142,19 @@
 "Mod+BracketLeft" = "window-consume-or-expel-left"
 "Mod+BracketRight" = "window-consume-or-expel-right"
 
-"Mod+R" = "window-cycle-width"
-"Mod+Alt+R" = "window-cycle-width-back"
-"Mod+Shift+R" = "window-cycle-height"
-"Mod+Shift+Alt+R" = "window-cycle-height-back"
+"Mod+R" = "window-cycle-primary-extent"
+"Mod+Alt+R" = "window-cycle-primary-extent-back"
+"Mod+Shift+R" = "window-cycle-secondary-extent"
+"Mod+Shift+Alt+R" = "window-cycle-secondary-extent-back"
 
-"Mod+Minus" = "window-modify-width:-0.1"
-"Mod+Equal" = "window-modify-width:0.1"
-"Mod+Shift+Minus" = "window-modify-height:-0.1"
-"Mod+Shift+Equal" = "window-modify-height:0.1"
+"Mod+Minus" = "window-modify-width-left:-0.1"
+"Mod+Ctrl+Minus" = "window-modify-width-right:-0.1"
+"Mod+Equal" = "window-modify-width-left:0.1"
+"Mod+Ctrl+Equal" = "window-modify-width-right:0.1"
+"Mod+Shift+Minus" = "window-modify-height-down:-0.1"
+"Mod+Ctrl+Shift+Minus" = "window-modify-height-up:-0.1"
+"Mod+Shift+Equal" = "window-modify-height-down:0.1"
+"Mod+Ctrl+Shift+Equal" = "window-modify-height-up:0.1"
 
 "Mod+C" = "window-center"
 "Mod+Alt+C" = "column-center"

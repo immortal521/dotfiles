@@ -10,8 +10,11 @@ files = [
   "overview.toml",
   "rules.toml",
   "workspaces.toml",
-  "noctalia.toml",
 ]
+
+[include.optional]
+files = ["noctalia.toml"]
+
 
 [general]
 autostart = [
@@ -20,6 +23,8 @@ autostart = [
   "wl-paste --watch cliphist store",
   "vicinae server",
   "wl-clip-persist --clipboard regular",
+  "flclash",
+  "qqmusic"
 ]
 
 xwayland = true                # requires restart to change
