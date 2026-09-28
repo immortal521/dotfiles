@@ -5,6 +5,7 @@
 # ============================================================
 [[window_rule]]
 blur = true
+blur_optimized = false
 
 # [[window_rule]]
 # match.is_focused = false
