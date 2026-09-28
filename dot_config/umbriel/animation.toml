@@ -7,19 +7,19 @@ curve = "easeout"
 enabled = true
 duration_ms = 350
 curve = "easeout"
-shader = "./shaders/radial-reveal.glsl"
+effect = "radial-reveal"
 
 [animation.windows_out]
 enabled = true
 duration_ms = 350
 curve = "easeout"
-shader = "./shaders/radial-reveal.glsl"
+effect = "radial-reveal"
 
 [animation.windows_move]
 enabled = true
 duration_ms = 400
 curve = "snappy"
-shader = "./shaders/squash.glsl"
+effect = "squash"
 
 [animation.workspaces]
 enabled = true

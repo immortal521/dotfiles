@@ -1,0 +1,7 @@
+[effects.preset.radial-reveal]
+kind = "animation"
+shader = "./shaders/radial-reveal.glsl"
+
+[effects.preset.squash]
+kind = "animation"
+shader = "./shaders/squash.glsl"
