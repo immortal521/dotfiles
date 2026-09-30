@@ -1,0 +1,22 @@
+{
+  "npmCommand": [
+    "pnpm"
+  ],
+  "lastChangelogVersion": "0.85.1",
+  "theme": "noctalia",
+  "defaultProvider": "opencode",
+  "defaultModel": "nemotron-3.5-lightning-free",
+  "quietStartup": true,
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "npm:pi-exa",
+    "npm:pi-powerline-footer",
+    "npm:pi-cache-optimizer",
+    "npm:@mrclrchtr/supi-claude-md",
+    "npm:pi-simplify",
+    "npm:@narumitw/pi-plan-mode",
+    "npm:@tintinweb/pi-subagents",
+    "npm:@tintinweb/pi-tasks",
+    "git:github.com/DietrichGebert/ponytail"
+  ]
+}
